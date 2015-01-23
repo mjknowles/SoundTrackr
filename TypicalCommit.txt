@@ -1,0 +1,8 @@
+http://rogerdudler.github.io/git-guide/
+
+-- add to index
+git add *
+-- commit to HEAD
+git commit -m "my comment
+-- push to remote
+git push origin [branch name(master currently)]
