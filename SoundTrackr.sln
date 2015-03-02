@@ -5,7 +5,15 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Web", "SoundTrackr.Web\SoundTrackr.Web.csproj", "{DB8B5101-D94F-46AF-B843-5732CACC7F3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Web.Tests", "SoundTrackr.Web.Tests\SoundTrackr.Web.Tests.csproj", "{38BC871A-D495-45D9-920E-BDC38F75B4FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Service", "SoundTrackr.Service\SoundTrackr.Service.csproj", "{65D99C90-1EBD-4405-A3C7-057D7B8109E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Domain", "SoundTrackr.Domain\SoundTrackr.Domain.csproj", "{4304ADE2-B742-44CC-815F-DAF7756EE016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Common", "SoundTrackr.Common\SoundTrackr.Common.csproj", "{F88E770F-8834-4B81-AF71-5EC139293F28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Repository", "SoundTrackr.Repository\SoundTrackr.Repository.csproj", "{F9DA73AF-AF6E-489B-BCC7-B952E7623997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Tests", "SoundTrackr.Tests\SoundTrackr.Tests.csproj", "{38BC871A-D495-45D9-920E-BDC38F75B4FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +25,22 @@ Global
 		{DB8B5101-D94F-46AF-B843-5732CACC7F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8B5101-D94F-46AF-B843-5732CACC7F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB8B5101-D94F-46AF-B843-5732CACC7F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D99C90-1EBD-4405-A3C7-057D7B8109E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D99C90-1EBD-4405-A3C7-057D7B8109E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D99C90-1EBD-4405-A3C7-057D7B8109E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D99C90-1EBD-4405-A3C7-057D7B8109E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4304ADE2-B742-44CC-815F-DAF7756EE016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4304ADE2-B742-44CC-815F-DAF7756EE016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4304ADE2-B742-44CC-815F-DAF7756EE016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4304ADE2-B742-44CC-815F-DAF7756EE016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88E770F-8834-4B81-AF71-5EC139293F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88E770F-8834-4B81-AF71-5EC139293F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88E770F-8834-4B81-AF71-5EC139293F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88E770F-8834-4B81-AF71-5EC139293F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU

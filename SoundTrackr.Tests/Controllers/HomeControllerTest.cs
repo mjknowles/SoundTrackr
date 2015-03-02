@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoundTrackr.Web;
 using SoundTrackr.Web.Controllers;
 
-namespace SoundTrackr.Web.Tests.Controllers
+namespace SoundTrackr.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
