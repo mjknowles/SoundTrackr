@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundTrackr.Repository
+namespace SoundTrackr.Repository.DatabaseModels
 {
-    public class Class1
+    class TrackDb
     {
     }
 }
