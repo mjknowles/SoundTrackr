@@ -11,7 +11,7 @@ namespace SoundTrackr.Repository
     public class SoundTrackrContext : DbContext
     {
         public SoundTrackrContext()
-            : base("GifAtMeContext") 
+            : base("SoundTrackrContext") 
         {
             // Since application is layered, protect yourself from
             // lazy loading from a disposed of context

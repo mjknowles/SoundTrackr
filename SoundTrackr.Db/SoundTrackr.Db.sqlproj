@@ -58,5 +58,11 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="CustomScripts" />
+    <Folder Include="CustomScripts\SongCoord" />
+    <Folder Include="CustomScripts\SongCoord\INSERT" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="CustomScripts\SongCoord\INSERT\Insert3Coords.sql" />
   </ItemGroup>
 </Project>
