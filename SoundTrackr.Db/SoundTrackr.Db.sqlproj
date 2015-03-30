@@ -63,6 +63,6 @@
     <Folder Include="CustomScripts\SongCoord\INSERT" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="CustomScripts\SongCoord\INSERT\Insert3Coords.sql" />
+    <PostDeploy Include="CustomScripts\SongCoord\INSERT\Insert3Coords.sql" />
   </ItemGroup>
 </Project>

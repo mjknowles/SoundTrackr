@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,17 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseModels\SongCoordDb.cs" />
+    <Compile Include="DatabaseModels\TrackStatDb.cs" />
     <Compile Include="DatabaseModels\TrackDb.cs" />
     <Compile Include="DatabaseModels\UserDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericDomainTypeRepository.cs" />
+    <Compile Include="Repositories\TrackRepository.cs" />
     <Compile Include="SoundTrackrContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoundTrackr.Common\SoundTrackr.Common.csproj">
       <Project>{f88e770f-8834-4b81-af71-5ec139293f28}</Project>
       <Name>SoundTrackr.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoundTrackr.Domain\SoundTrackr.Domain.csproj">
+      <Project>{4304ade2-b742-44cc-815f-daf7756ee016}</Project>
+      <Name>SoundTrackr.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

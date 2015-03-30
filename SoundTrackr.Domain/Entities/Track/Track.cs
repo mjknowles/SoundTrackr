@@ -13,7 +13,9 @@ namespace SoundTrackr.Domain.Entities.Track
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }
         public string StartState { get; set; }
-        public List<SongCoord.SongCoord> SongCoords { get; set; }
+        public List<TrackStat.TrackStat> TrackStats { get; set; }
+
+        public Track() { }
 
         protected override void Validate()
         {

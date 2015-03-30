@@ -39,8 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DTOs\DTOConversions\ConversionHelper.cs" />
+    <Compile Include="DTOs\LocationDTO.cs" />
+    <Compile Include="DTOs\TrackDTO.cs" />
+    <Compile Include="DTOs\TrackStatDTO.cs" />
+    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
+    <Compile Include="Messaging\IntegerIdRequest.cs" />
+    <Compile Include="Messaging\ServiceRequestBase.cs" />
+    <Compile Include="Messaging\ServiceResponseBase.cs" />
+    <Compile Include="Messaging\Track\BaseTrackRequest.cs" />
+    <Compile Include="Messaging\Track\GetTrackRequest.cs" />
+    <Compile Include="Messaging\Track\GetTrackResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Track\ITrackService.cs" />
+    <Compile Include="Track\TrackService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoundTrackr.Common\SoundTrackr.Common.csproj">
@@ -51,6 +63,9 @@
       <Project>{4304ade2-b742-44cc-815f-daf7756ee016}</Project>
       <Name>SoundTrackr.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,7 @@
-﻿using SoundTrackr.Repository.DatabaseModels;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using SoundTrackr.Common.Domain;
+using SoundTrackr.Common.UnitOfWork;
+using SoundTrackr.Repository.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository
 {
-    public class SoundTrackrContext : DbContext
+    public class SoundTrackrContext : DbContext, IUnitOfWork
     {
         public SoundTrackrContext()
             : base("SoundTrackrContext") 
@@ -20,6 +23,26 @@ namespace SoundTrackr.Repository
         }
 
         public DbSet<UserDb> Users { get; set; }
-        public DbSet<TrackDb> Tracks { get; set; }    
+        public DbSet<TrackDb> Tracks { get; set; }
+
+        public void RegisterInsertion(IAggregateRoot aggregateRoot)
+        {
+            this.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Added;
+        }
+
+        public void RegisterUpdate(IAggregateRoot aggregateRoot)
+        {
+            this.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Modified;
+        }
+
+        public void RegisterDeletion(IAggregateRoot aggregateRoot)
+        {
+            this.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Deleted;
+        }
+
+        public void Commit()
+        {
+            this.SaveChanges();
+        }
     }
 }

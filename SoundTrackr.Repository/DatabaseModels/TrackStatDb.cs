@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.DatabaseModels
 {
-    public class SongCoordDb
+    public class TrackStatDb
     {
         public int Id { get; set; }
         public string Song { get; set; }

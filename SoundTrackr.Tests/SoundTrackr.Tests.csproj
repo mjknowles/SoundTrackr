@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -102,10 +105,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoundTrackr.Common\SoundTrackr.Common.csproj">
+      <Project>{f88e770f-8834-4b81-af71-5ec139293f28}</Project>
+      <Name>SoundTrackr.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoundTrackr.Domain\SoundTrackr.Domain.csproj">
+      <Project>{4304ade2-b742-44cc-815f-daf7756ee016}</Project>
+      <Name>SoundTrackr.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoundTrackr.Service\SoundTrackr.Service.csproj">
+      <Project>{65d99c90-1ebd-4405-a3c7-057d7b8109e9}</Project>
+      <Name>SoundTrackr.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoundTrackr.Web\SoundTrackr.Web.csproj">
       <Project>{DB8B5101-D94F-46AF-B843-5732CACC7F3D}</Project>
       <Name>SoundTrackr.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

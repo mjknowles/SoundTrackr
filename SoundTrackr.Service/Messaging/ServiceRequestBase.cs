@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundTrackr.Service
+namespace SoundTrackr.Service.Messaging
 {
-    public class Class1
+    public abstract class ServiceRequestBase
     {
     }
 }

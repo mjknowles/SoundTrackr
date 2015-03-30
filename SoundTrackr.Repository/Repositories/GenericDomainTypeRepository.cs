@@ -13,7 +13,7 @@ namespace SoundTrackr.Repository.Repositories
         where DomainType : class, IAggregateRoot
     {
         private readonly IUnitOfWork _unitOfWork;
-        private GifAtMeContext _context;
+        private SoundTrackrContext _context;
 
         public GenericDomainTypeRepository(IUnitOfWork unitOfWork)
         {

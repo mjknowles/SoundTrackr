@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\SongCoord\SongCoord.cs" />
+    <Compile Include="Entities\TrackStat\TrackStat.cs" />
+    <Compile Include="Entities\Track\ITrackRepoAccessor.cs" />
     <Compile Include="Entities\Track\ITrackRepository.cs" />
     <Compile Include="Entities\Track\Track.cs" />
+    <Compile Include="Entities\Track\TrackRepoAccessor.cs" />
     <Compile Include="Entities\User\IUserRepository.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueObjects\Location.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoundTrackr.Common\SoundTrackr.Common.csproj">
@@ -54,7 +56,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ValueObjects\" />
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
