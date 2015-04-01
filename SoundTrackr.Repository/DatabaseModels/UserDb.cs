@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.DatabaseModels
 {
-    class UserDb
+    public class UserDb
     {
     }
 }

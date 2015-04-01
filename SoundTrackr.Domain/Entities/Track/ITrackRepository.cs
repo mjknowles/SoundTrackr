@@ -9,6 +9,5 @@ namespace SoundTrackr.Domain.Entities.Track
 {
     public interface ITrackRepository : IAggregateRootRepository<Track, int>
     {
-        Track GetTrack(int id);
     }
 }

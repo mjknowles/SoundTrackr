@@ -2,6 +2,7 @@
 using SoundTrackr.Common.UnitOfWork;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -9,38 +10,29 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.Repositories
 {
-    public abstract class GenericDomainTypeRepository<DomainType, IdType> : IDisposable
+    public abstract class GenericDomainTypeRepository<DomainType, IdType>
         where DomainType : class, IAggregateRoot
     {
         private readonly IUnitOfWork _unitOfWork;
-        private SoundTrackrContext _context;
+        internal SoundTrackrContext _context;
 
-        public GenericDomainTypeRepository(IUnitOfWork unitOfWork)
-        {
-            if (unitOfWork == null) throw new ArgumentNullException("Unit of work");
-            _unitOfWork = unitOfWork;
-        }
-
-        public GenericDomainTypeRepository(IUnitOfWork unitOfWork, GifAtMeContext context)
+        public GenericDomainTypeRepository(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory)
         {
             if (unitOfWork == null) throw new ArgumentNullException("Unit of work");
             _unitOfWork = unitOfWork;
 
-            if (context == null) throw new ArgumentNullException("GifAtMeContext");
-            _context = context;
+            if (dbContextFactory == null) throw new ArgumentNullException("DbConntextFactory");
+            _context = dbContextFactory.Create();
         }
 
         public virtual DomainType FindById(IdType id)
         {
-            DomainType dbGifEntry;
-            using (var context = new GifAtMeContext())
-            {
-                dbGifEntry = context.Set<DomainType>().Find(id);
-            }
+            DomainType domainObj;
+            domainObj = _context.Set<DomainType>().Find(id);
 
-            if (dbGifEntry != null)
+            if (domainObj != null)
             {
-                return dbGifEntry;
+                return domainObj;
             }
             return default(DomainType);
         }
@@ -55,18 +47,15 @@ namespace SoundTrackr.Repository.Repositories
         public virtual IEnumerable<DomainType> GetAll(params Expression<Func<DomainType, object>>[] navigationProperties)
         {
             List<DomainType> list;
-            using (var context = new GifAtMeContext())
-            {
-                IQueryable<DomainType> dbQuery = context.Set<DomainType>();
+            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
 
-                //Apply eager loading
-                foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
+            //Apply eager loading
+            foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
+                dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
 
-                list = dbQuery
-                    .AsNoTracking()
-                    .ToList<DomainType>();
-            }
+            list = dbQuery
+                .AsNoTracking()
+                .ToList<DomainType>();
             return list;
         }
 
@@ -74,19 +63,17 @@ namespace SoundTrackr.Repository.Repositories
             params Expression<Func<DomainType, object>>[] navigationProperties)
         {
             List<DomainType> list;
-            using (var context = new GifAtMeContext())
-            {
-                IQueryable<DomainType> dbQuery = context.Set<DomainType>();
 
-                //Apply eager loading
-                foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
+            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
 
-                list = dbQuery
-                    .AsNoTracking()
-                    .Where(where)
-                    .ToList<DomainType>();
-            }
+            //Apply eager loading
+            foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
+                dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
+
+            list = dbQuery
+                .AsNoTracking()
+                .Where(where)
+                .ToList<DomainType>();
             return list;
         }
 
@@ -94,9 +81,7 @@ namespace SoundTrackr.Repository.Repositories
              params Expression<Func<DomainType, object>>[] navigationProperties)
         {
             DomainType item = null;
-            using (var context = new GifAtMeContext())
-            {
-                IQueryable<DomainType> dbQuery = context.Set<DomainType>();
+            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
 
                 //Apply eager loading
                 foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
@@ -106,7 +91,6 @@ namespace SoundTrackr.Repository.Repositories
                     .AsNoTracking() //Don't track any changes for the selected item
                     .Where(where)
                     .ElementAtOrDefault(index); ; //Apply where clause
-            }
             return item;
         }
 
@@ -123,28 +107,6 @@ namespace SoundTrackr.Repository.Repositories
         public virtual void Delete(DomainType item)
         {
             _unitOfWork.RegisterDeletion(item);
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposing)
-            {
-                return;
-            }
-
-            if (_context == null)
-            {
-                return;
-            }
-
-            _context.Dispose();
-            _context = null;
         }
     }
 }

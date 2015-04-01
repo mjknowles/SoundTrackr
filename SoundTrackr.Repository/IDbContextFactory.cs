@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundTrackr.Repository.DatabaseModels
+namespace SoundTrackr.Repository
 {
-    public class TrackDb
+    public interface IDbContextFactory
     {
+        SoundTrackrContext Create();
     }
 }
