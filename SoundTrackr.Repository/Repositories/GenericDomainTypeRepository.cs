@@ -11,24 +11,24 @@ using System.Threading.Tasks;
 namespace SoundTrackr.Repository.Repositories
 {
     public abstract class GenericDomainTypeRepository<DomainType, IdType>
-        where DomainType : class, IAggregateRoot
+        where DomainType : EntityBase<IdType>, IAggregateRoot
     {
         private readonly IUnitOfWork _unitOfWork;
-        internal SoundTrackrContext _context;
+        internal DbContext _context;
 
         public GenericDomainTypeRepository(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory)
         {
             if (unitOfWork == null) throw new ArgumentNullException("Unit of work");
             _unitOfWork = unitOfWork;
 
-            if (dbContextFactory == null) throw new ArgumentNullException("DbConntextFactory");
+            if (dbContextFactory == null) throw new ArgumentNullException("DbContextFactory");
             _context = dbContextFactory.Create();
         }
 
         public virtual DomainType FindById(IdType id)
         {
             DomainType domainObj;
-            domainObj = _context.Set<DomainType>().Find(id);
+            domainObj = _context.Set<DomainType>().SingleOrDefault<DomainType>(x => x.Id.Equals(id));
 
             if (domainObj != null)
             {

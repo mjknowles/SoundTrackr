@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using SoundTrackr.Common.Domain;
 using SoundTrackr.Common.UnitOfWork;
-using SoundTrackr.Repository.DatabaseModels;
+using SoundTrackr.Domain.Entities.Track;
+using SoundTrackr.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,8 +23,8 @@ namespace SoundTrackr.Repository
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<UserDb> Users { get; set; }
-        public DbSet<TrackDb> Tracks { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Track> Tracks { get; set; }
 
         public void RegisterInsertion(IAggregateRoot aggregateRoot)
         {

@@ -9,6 +9,6 @@ namespace SoundTrackr.Repository
 {
     public interface IDbContextFactory
     {
-        SoundTrackrContext Create();
+        DbContext Create();
     }
 }

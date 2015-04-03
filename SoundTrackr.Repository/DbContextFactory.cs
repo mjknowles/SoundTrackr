@@ -12,7 +12,7 @@ namespace SoundTrackr.Repository
     {
         private string _dataContextKey = "EfObjectContext";
 
-        public SoundTrackrContext Create()
+        public DbContext Create()
         {
             SoundTrackrContext stContext = null;
             if (HttpContext.Current.Items.Contains(_dataContextKey))
