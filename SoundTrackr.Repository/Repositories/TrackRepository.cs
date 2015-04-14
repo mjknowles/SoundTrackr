@@ -16,6 +16,16 @@ namespace SoundTrackr.Repository.Repositories
     {
         public TrackRepository(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory) : base(unitOfWork, dbContextFactory) { }
 
+        public Track GetTrackById(int id)
+        {
+            return this.FindById(id);
+        }
+
+        public List<Track> GetTracksByUser(string userId)
+        {
+            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).ToList());
+        }
+
         private override Track ConvertToDomain(TrackDb trackDb)
         {
             Track track = new Track()
@@ -23,7 +33,8 @@ namespace SoundTrackr.Repository.Repositories
                 TrackStart = trackDb.TrackStart,
                 TrackEnd = trackDb.TrackEnd,
                 StartCity = trackDb.StartCity,
-                StartState = trackDb.StartState
+                StartState = trackDb.StartState,
+                UserId = trackDb.UserId
             };
             foreach(TrackStatDb tsdb in trackDb.TrackStats)
             {
@@ -45,7 +56,8 @@ namespace SoundTrackr.Repository.Repositories
                 TrackStart = track.TrackStart,
                 TrackEnd = track.TrackEnd,
                 StartCity = track.StartCity,
-                StartState = track.StartState
+                StartState = track.StartState,
+                UserId = track.UserId
             };
             foreach (TrackStat ts in track.TrackStats)
             {

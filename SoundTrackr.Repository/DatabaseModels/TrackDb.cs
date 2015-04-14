@@ -13,5 +13,6 @@ namespace SoundTrackr.Repository.DatabaseModels
         public string StartCity { get; set; }
         public string StartState { get; set; }
         public List<TrackStatDb> TrackStats { get; set; }
+        public string  UserId { get; set; }
     }
 }

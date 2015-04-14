@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Service.Messaging.Track
 {
-    public class GetTrackRequest : BaseTrackRequest
+    public class GetTracksRequest
     {
-        public GetTrackRequest(int id, string userId) : base(id) 
+        public GetTracksRequest(string userId)
         {
             UserId = userId;
         }
 
-        public string UserId { get; set; }
-    }
+        public string UserId { get; set; }    }
 }

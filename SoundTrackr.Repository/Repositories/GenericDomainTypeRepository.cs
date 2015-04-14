@@ -73,6 +73,16 @@ namespace SoundTrackr.Repository.Repositories
             _unitOfWork.RegisterDeletion(ConvertToDatabase(item));
         }
 
+        public virtual List<DomainType> ConvertToDomainList(List<DbType> dbs)
+        {
+            List<DomainType> domainList = new List<DomainType>();
+            foreach(DbType db in dbs)
+            {
+                domainList.Add(ConvertToDomain(db));
+            }
+            return domainList;
+        }
+
         public abstract DomainType ConvertToDomain(DbType db);
         public abstract DbType ConvertToDatabase(DomainType dom); 
     }

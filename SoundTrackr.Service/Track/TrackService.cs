@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SoundTrackr.Service.DTOs;
 
 namespace SoundTrackr.Service.Track
 {
@@ -44,9 +45,42 @@ namespace SoundTrackr.Service.Track
             return getTrackResponse;
         }
 
+        public GetTracksResponse GetTracks(GetTracksRequest getTracksRequest)
+        {
+            GetTracksResponse getTracksResponse = new GetTracksResponse();
+            List<SoundTrackr.Domain.Entities.Track.Track> tracks = null;
+            try
+            {
+                tracks = _trackServiceRepoAccessor.GetTracks(getTracksRequest.UserId);
+                if (tracks == null)
+                {
+                    getTracksResponse.Exception = GetStandardTracksNotFoundException();
+                }
+                else
+                {
+                    getTracksResponse.Tracks = new List<TrackDTO>();
+                    foreach (SoundTrackr.Domain.Entities.Track.Track track in tracks)
+                    {
+                        getTracksResponse.Tracks.Add(track.ConvertToDTO());
+                    } 
+                }
+            }
+            catch (Exception ex)
+            {
+                getTracksResponse.Exception = ex;
+            }
+
+            return getTracksResponse;
+        }
+
         private ResourceNotFoundException GetStandardTrackNotFoundException()
         {
             return new ResourceNotFoundException("The requested track was not found.");
+        }
+
+        private ResourceNotFoundException GetStandardTracksNotFoundException()
+        {
+            return new ResourceNotFoundException("No tracks found for user.");
         }
     }
 }

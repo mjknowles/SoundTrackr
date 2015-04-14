@@ -9,12 +9,7 @@ namespace SoundTrackr.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private ITrackService _trackService; 
-
-        public HomeController(ITrackService trackService)
-        {
-            _trackService = trackService;
-        }
+        public HomeController(){   }
 
         public ActionResult Index()
         {

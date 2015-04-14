@@ -50,6 +50,8 @@
     <Compile Include="Messaging\Track\BaseTrackRequest.cs" />
     <Compile Include="Messaging\Track\GetTrackRequest.cs" />
     <Compile Include="Messaging\Track\GetTrackResponse.cs" />
+    <Compile Include="Messaging\Track\GetTracksRequest.cs" />
+    <Compile Include="Messaging\Track\GetTracksResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track\ITrackService.cs" />
     <Compile Include="Track\TrackService.cs" />
