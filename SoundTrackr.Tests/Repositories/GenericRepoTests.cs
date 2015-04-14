@@ -21,7 +21,14 @@ namespace SoundTrackr.Web.Tests.Repositories
         }
     }
 
-    public class TestGenericRepo : GenericDomainTypeRepository<TestEntity, int> 
+    public class TestEntityDb : EntityBase<int>, IAggregateRoot
+    {
+        protected override void Validate()
+        {
+        }
+    }
+
+    public class TestGenericRepo : GenericDomainTypeRepository<TestEntity, TestEntityDb, int> 
     {
         public TestGenericRepo(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory) : base(unitOfWork, dbContextFactory) { }
     }
@@ -29,35 +36,32 @@ namespace SoundTrackr.Web.Tests.Repositories
     [TestClass]
     public class GenericRepoTests
     {
-        //private Mock<IUnitOfWork> _mockUnitOfWork;
-        //private Mock<IDbContextFactory> _mockDbContextFactory;
+        private Mock<IUnitOfWork> _mockUnitOfWork;
+        private Mock<IDbContextFactory> _mockDbContextFactory;
+        private IFixture _fixture;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            //mockUnitOfWork = new Mock<IUnitOfWork>();
+            //_mockUnitOfWork = new Mock<IUnitOfWork>();
             //_mockDbContextFactory = new Mock<IDbContextFactory>();
+            _fixture = new Fixture().Customize(new AutoMoqCustomization());
+            _mockUnitOfWork = _fixture.Freeze<Mock<IUnitOfWork>>();
+            _mockDbContextFactory = _fixture.Freeze<Mock<IDbContextFactory>>();
+
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            //_mockUnitOfWork.VerifyAll();
-            //_mockDbContextFactory.VerifyAll();
+            _mockUnitOfWork.VerifyAll();
+            _mockDbContextFactory.VerifyAll();
         }
 
         [TestMethod]
         public void GenericRepo_FindById_ExistingID_ObjectIsReturned()
         {
-
-            /*var data = new List<TestEntity> 
-            { 
-                new TestEntity { Id = 0 }, 
-                new TestEntity { Id = 1 }, 
-                new TestEntity { Id = 2 }, 
-            }.AsQueryable();
-            
-            
+            var data = _fixture.CreateMany<TestEntity>().AsQueryable<TestEntity>();
             var mockSet = new Mock<DbSet<TestEntity>>();
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.Expression).Returns(data.Expression);
@@ -67,27 +71,36 @@ namespace SoundTrackr.Web.Tests.Repositories
             var mockContext = new Mock<DbContext>();
             mockContext.Setup(c => c.Set<TestEntity>()).Returns(mockSet.Object);
 
-            //_mockDbContextFactory.Setup(x => x.Create()).Returns(mockContext.Object);
+            _mockDbContextFactory.Setup(x => x.Create()).Returns(mockContext.Object);
 
-            //TestGenericRepo testRepo = new TestGenericRepo(_mockUnitOfWork.Object, _mockDbContextFactory.Object);
-            */
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
+            var sut = _fixture.Create<TestGenericRepo>();
 
-            var data = fixture.CreateMany<TestEntity>().ToList<TestEntity>().AsQueryable<TestEntity>();
-            var mockSet = fixture.Freeze<Mock<DbSet<TestEntity>>>();
+            var expectedModel = data.ToList().FirstOrDefault();
+            var actualModel = sut.FindById(expectedModel.Id);
+
+            Assert.AreEqual(expectedModel.Id, actualModel.Id);
+        }
+
+        [TestMethod]
+        public void GenericRepo_FindById_NonExistantId_NullIsReturned()
+        {
+            var data = _fixture.CreateMany<TestEntity>().AsQueryable<TestEntity>();
+            var mockSet = new Mock<DbSet<TestEntity>>();
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<TestEntity>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            var contextFactory = fixture.Freeze<Mock<IDbContextFactory>>();
-            contextFactory.Setup(x => x.Create()).Returns();
-            var sut = fixture.Create<TestGenericRepo>();
+            var mockContext = new Mock<DbContext>();
+            mockContext.Setup(c => c.Set<TestEntity>()).Returns(mockSet.Object);
 
-            var expectedModel = new Track { Id = 1 };
-            var actualModel = sut.FindById(1);
+            _mockDbContextFactory.Setup(x => x.Create()).Returns(mockContext.Object);
 
-            Assert.AreEqual(expectedModel.Id, actualModel.Id);
+            var sut = _fixture.Create<TestGenericRepo>();
+
+            var actualModel = sut.FindById(0);
+
+            Assert.IsNull(actualModel);
         }
     }
 }

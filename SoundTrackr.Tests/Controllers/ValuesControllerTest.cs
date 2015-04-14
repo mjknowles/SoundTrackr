@@ -10,7 +10,7 @@ using SoundTrackr.Web.Controllers;
 
 namespace SoundTrackr.Tests.Controllers
 {
-    [TestClass]
+    /*[TestClass]
     public class ValuesControllerTest
     {
         [TestMethod]
@@ -77,5 +77,5 @@ namespace SoundTrackr.Tests.Controllers
 
             // Assert
         }
-    }
+    }*/
 }
