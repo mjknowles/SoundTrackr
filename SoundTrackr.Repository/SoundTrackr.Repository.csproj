@@ -53,10 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseModels\GenericDb.cs" />
+    <Compile Include="DatabaseModels\TrackDb.cs" />
+    <Compile Include="DatabaseModels\TrackStatDb.cs" />
+    <Compile Include="DatabaseModels\UserDb.cs" />
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="IDbContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericDomainTypeRepository.cs" />
+    <Compile Include="Repositories\TrackRepository.cs" />
     <Compile Include="SoundTrackrContext.cs" />
   </ItemGroup>
   <ItemGroup>

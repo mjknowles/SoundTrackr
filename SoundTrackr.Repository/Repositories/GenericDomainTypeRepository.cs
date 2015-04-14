@@ -1,5 +1,6 @@
 ﻿using SoundTrackr.Common.Domain;
 using SoundTrackr.Common.UnitOfWork;
+using SoundTrackr.Repository.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.Repositories
 {
-    public abstract class GenericDomainTypeRepository<DomainType, IdType>
+    public abstract class GenericDomainTypeRepository<DomainType, DbType, IdType>
         where DomainType : EntityBase<IdType>, IAggregateRoot
+        where DbType : GenericDb
     {
         private readonly IUnitOfWork _unitOfWork;
         internal DbContext _context;
@@ -28,7 +30,7 @@ namespace SoundTrackr.Repository.Repositories
         public virtual DomainType FindById(IdType id)
         {
             DomainType domainObj;
-            domainObj = _context.Set<DomainType>().SingleOrDefault<DomainType>(x => x.Id.Equals(id));
+            domainObj = ConvertToDomain(_context.Set<DbType>().SingleOrDefault<DbType>(x => x.Id.Equals(id)));
 
             if (domainObj != null)
             {
@@ -44,69 +46,34 @@ namespace SoundTrackr.Repository.Repositories
         /// </summary>
         /// <param name="navigationProperties"></param>
         /// <returns></returns>
-        public virtual IEnumerable<DomainType> GetAll(params Expression<Func<DomainType, object>>[] navigationProperties)
+        public virtual IEnumerable<DomainType> GetAll()
         {
-            List<DomainType> list;
-            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
-
-            //Apply eager loading
-            foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
-                dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
-
-            list = dbQuery
-                .AsNoTracking()
-                .ToList<DomainType>();
-            return list;
-        }
-
-        public virtual IList<DomainType> GetList(Func<DomainType, bool> where,
-            params Expression<Func<DomainType, object>>[] navigationProperties)
-        {
-            List<DomainType> list;
-
-            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
-
-            //Apply eager loading
-            foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
-                dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
-
-            list = dbQuery
-                .AsNoTracking()
-                .Where(where)
-                .ToList<DomainType>();
-            return list;
-        }
-
-        public virtual DomainType GetSingle(Func<DomainType, bool> where, int index,
-             params Expression<Func<DomainType, object>>[] navigationProperties)
-        {
-            DomainType item = null;
-            IQueryable<DomainType> dbQuery = _context.Set<DomainType>();
-
-                //Apply eager loading
-                foreach (Expression<Func<DomainType, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<DomainType, object>(navigationProperty);
-
-                item = dbQuery
-                    .AsNoTracking() //Don't track any changes for the selected item
-                    .Where(where)
-                    .ElementAtOrDefault(index); ; //Apply where clause
-            return item;
+            IQueryable<DbType> dbQuery = _context.Set<DbType>();
+            List<DbType> dbList = dbQuery.AsNoTracking().ToList<DbType>();
+            List<DomainType> domainList = new List<DomainType>();
+            foreach(DbType dt in dbList)
+            {
+                domainList.Add(ConvertToDomain(dt));
+            }
+            return domainList;
         }
 
         public virtual void Insert(DomainType item)
         {
-            _unitOfWork.RegisterInsertion(item);
+            _unitOfWork.RegisterInsertion(ConvertToDatabase(item));
         }
 
         public virtual void Update(DomainType item)
         {
-            _unitOfWork.RegisterUpdate(item);
+            _unitOfWork.RegisterUpdate(ConvertToDatabase(item));
         }
 
         public virtual void Delete(DomainType item)
         {
-            _unitOfWork.RegisterDeletion(item);
+            _unitOfWork.RegisterDeletion(ConvertToDatabase(item));
         }
+
+        public abstract DomainType ConvertToDomain(DbType db);
+        public abstract DbType ConvertToDatabase(DomainType dom); 
     }
 }

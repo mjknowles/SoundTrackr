@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.DatabaseModels
 {
-    public class TrackDb
+    public class TrackDb : GenericDb
     {
-        public int Id { get; set; }
         public DateTime TrackStart { get; set; }
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }
