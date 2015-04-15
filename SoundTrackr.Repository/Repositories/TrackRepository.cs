@@ -26,7 +26,7 @@ namespace SoundTrackr.Repository.Repositories
             return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).ToList());
         }
 
-        private override Track ConvertToDomain(TrackDb trackDb)
+        public override Track ConvertToDomain(TrackDb trackDb)
         {
             Track track = new Track()
             {
@@ -49,7 +49,7 @@ namespace SoundTrackr.Repository.Repositories
             return track;
         }
 
-        private override Track ConvertToDatabase(Track track)
+        public override TrackDb ConvertToDatabase(Track track)
         {
             TrackDb trackDb = new TrackDb()
             {
@@ -73,7 +73,7 @@ namespace SoundTrackr.Repository.Repositories
                     Location = DbGeography.PointFromText(wkt, 4326)
                 });
             }
-            return track;
+            return trackDb;
         }
     }
 }

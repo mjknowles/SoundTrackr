@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository
 {
-    public class SoundTrackrContext : DbContext
+    public class SoundTrackrContext : IdentityDbContext
     {
         public SoundTrackrContext()
             : base("SoundTrackrContext") 
@@ -24,7 +24,12 @@ namespace SoundTrackr.Repository
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<UserDb> Users { get; set; }
+        public DbSet<UserDb> AppUsers { get; set; }
         public DbSet<TrackDb> Tracks { get; set; }
+
+        public static SoundTrackrContext Create()
+        {
+            return new SoundTrackrContext();
+        }
     }
 }

@@ -11,35 +11,31 @@ namespace SoundTrackr.Repository
 {
     public class EfUnitOfWork
     {
-        public class EfUnitOfWork : IUnitOfWork
+        private DbContext _context;
+
+        public EfUnitOfWork(IDbContextFactory dbContextFactory)
         {
-            private DbContext _context;
-
-            public EfUnitOfWork(IDbContextFactory dbContextFactory)
-            {
-                _context = dbContextFactory.Create();
-            }
-
-            public void RegisterInsertion(IAggregateRoot aggregateRoot)
-            {
-                _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Added;
-            }
-
-            public void RegisterUpdate(IAggregateRoot aggregateRoot)
-            {
-                _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Modified;
-            }
-
-            public void RegisterDeletion(IAggregateRoot aggregateRoot)
-            {
-                _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Deleted;
-            }
-
-            public void Commit()
-            {
-                _context.SaveChanges();
-            }
+            _context = dbContextFactory.Create();
         }
 
+        public void RegisterInsertion(IAggregateRoot aggregateRoot)
+        {
+            _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Added;
+        }
+
+        public void RegisterUpdate(IAggregateRoot aggregateRoot)
+        {
+            _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Modified;
+        }
+
+        public void RegisterDeletion(IAggregateRoot aggregateRoot)
+        {
+            _context.Entry(aggregateRoot).State = System.Data.Entity.EntityState.Deleted;
+        }
+
+        public void Commit()
+        {
+            _context.SaveChanges();
+        }
     }
 }

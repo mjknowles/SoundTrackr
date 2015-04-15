@@ -203,6 +203,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExceptionDictionary.cs" />
+    <Compile Include="Helpers\HttpResponseBuilder.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -278,6 +280,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoundTrackr.Repository\SoundTrackr.Repository.csproj">
+      <Project>{f9da73af-af6e-489b-bcc7-b952e7623997}</Project>
+      <Name>SoundTrackr.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoundTrackr.Service\SoundTrackr.Service.csproj">
       <Project>{65d99c90-1ebd-4405-a3c7-057d7b8109e9}</Project>
       <Name>SoundTrackr.Service</Name>

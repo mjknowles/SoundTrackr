@@ -18,7 +18,7 @@ namespace SoundTrackr.Web.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    /*public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -30,4 +30,5 @@ namespace SoundTrackr.Web.Models
             return new ApplicationDbContext();
         }
     }
+     * */
 }
