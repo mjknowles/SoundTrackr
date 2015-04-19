@@ -60,6 +60,7 @@
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="EfUnitOfWork.cs" />
     <Compile Include="IDbContextFactory.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericDomainTypeRepository.cs" />
     <Compile Include="Repositories\TrackRepository.cs" />
