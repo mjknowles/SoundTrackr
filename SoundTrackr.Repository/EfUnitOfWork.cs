@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository
 {
-    public class EfUnitOfWork
+    public class EfUnitOfWork : IUnitOfWork
     {
         private DbContext _context;
 

@@ -9,6 +9,7 @@ using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace SoundTrackr.Repository.Repositories
 {
@@ -21,9 +22,14 @@ namespace SoundTrackr.Repository.Repositories
             return this.FindById(id);
         }
 
-        public List<Track> GetTracksByUser(string userId)
+        public List<Track> GetTracksByUserId(string userId)
         {
-            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).ToList());
+            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).Include(t => t.TrackStats).ToList());
+        }
+
+        public List<Track> GetTracksByUserName(string userName)
+        {
+            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.User.UserName.ToLower().Equals(userName.ToLower())).Include(t => t.TrackStats).ToList());
         }
 
         public override Track ConvertToDomain(TrackDb trackDb)
@@ -34,7 +40,8 @@ namespace SoundTrackr.Repository.Repositories
                 TrackEnd = trackDb.TrackEnd,
                 StartCity = trackDb.StartCity,
                 StartState = trackDb.StartState,
-                UserId = trackDb.UserId
+                UserId = trackDb.UserId,
+                TrackStats = new List<TrackStat>()
             };
             foreach(TrackStatDb tsdb in trackDb.TrackStats)
             {
@@ -57,7 +64,8 @@ namespace SoundTrackr.Repository.Repositories
                 TrackEnd = track.TrackEnd,
                 StartCity = track.StartCity,
                 StartState = track.StartState,
-                UserId = track.UserId
+                UserId = track.UserId,
+                TrackStats = new List<TrackStatDb>()
             };
             foreach (TrackStat ts in track.TrackStats)
             {

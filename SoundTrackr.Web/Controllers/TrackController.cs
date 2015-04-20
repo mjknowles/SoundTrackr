@@ -22,6 +22,7 @@ namespace SoundTrackr.Web.Controllers
             if (trackService == null) throw new ArgumentNullException("Track service in track controller");
             _trackService = trackService;
         }
+
         // GET: api/gifentries
         [Route("")]
         public HttpResponseMessage GetTracks()
@@ -29,6 +30,16 @@ namespace SoundTrackr.Web.Controllers
             ServiceResponseBase resp = _trackService.GetTracks(new GetTracksRequest(User.Identity.GetUserId()));
             return Request.BuildResponse(resp);
         }
+
+        // GET: api/gifentries
+        [Route("{userName}")]
+        public HttpResponseMessage GetTracks(string userName)
+        {
+            ServiceResponseBase resp = _trackService.GetTracks(new GetTracksRequest { UserName = userName });
+            return Request.BuildResponse(resp);
+        }
+
+
 
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using SoundTrackr.Web.Models;
+using SoundTrackr.Repository.DatabaseModels;
 
 namespace SoundTrackr.Web.Providers
 {
@@ -31,7 +32,7 @@ namespace SoundTrackr.Web.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            UserDb user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

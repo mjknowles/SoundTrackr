@@ -60,6 +60,14 @@
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="EfUnitOfWork.cs" />
     <Compile Include="IDbContextFactory.cs" />
+    <Compile Include="Migrations\201504192200596_InitialCreate.cs" />
+    <Compile Include="Migrations\201504192200596_InitialCreate.Designer.cs">
+      <DependentUpon>201504192200596_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200314289_AddNavUserTrack.cs" />
+    <Compile Include="Migrations\201504200314289_AddNavUserTrack.Designer.cs">
+      <DependentUpon>201504200314289_AddNavUserTrack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericDomainTypeRepository.cs" />
@@ -79,6 +87,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504192200596_InitialCreate.resx">
+      <DependentUpon>201504192200596_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200314289_AddNavUserTrack.resx">
+      <DependentUpon>201504200314289_AddNavUserTrack.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,9 +25,14 @@ namespace SoundTrackr.Domain.Entities.Track
             return _trackRepository.GetTrackById(id);
         }
 
-        public List<Track> GetTracks(string userId)
+        public List<Track> GetTracksByUserId(string userId)
         {
-            return _trackRepository.GetTracksByUser(userId);
+            return _trackRepository.GetTracksByUserId(userId);
+        }
+
+        public List<Track> GetTracksByUserName(string userName)
+        {
+            return _trackRepository.GetTracksByUserName(userName);
         }
 
     }

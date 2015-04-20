@@ -51,7 +51,14 @@ namespace SoundTrackr.Service.Track
             List<SoundTrackr.Domain.Entities.Track.Track> tracks = null;
             try
             {
-                tracks = _trackServiceRepoAccessor.GetTracks(getTracksRequest.UserId);
+                if(!String.IsNullOrEmpty(getTracksRequest.UserId))
+                {
+                    tracks = _trackServiceRepoAccessor.GetTracksByUserId(getTracksRequest.UserId);
+                }
+                else 
+                {
+                    tracks = _trackServiceRepoAccessor.GetTracksByUserName(getTracksRequest.UserName);
+                }
                 if (tracks == null)
                 {
                     getTracksResponse.Exception = GetStandardTracksNotFoundException();
