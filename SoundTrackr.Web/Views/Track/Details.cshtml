@@ -1,0 +1,50 @@
+﻿@model SoundTrackr.Service.DTOs.TrackDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TrackDTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TrackStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrackStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrackEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrackEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartState)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
