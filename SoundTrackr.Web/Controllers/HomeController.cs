@@ -17,5 +17,15 @@ namespace SoundTrackr.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Example1()
+        {
+            return View();
+        }
+
+        public ActionResult Example2()
+        {
+            return View();
+        }
     }
 }
