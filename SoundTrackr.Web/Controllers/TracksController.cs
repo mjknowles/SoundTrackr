@@ -29,7 +29,7 @@ namespace SoundTrackr.Web.Controllers.API
         [System.Web.Http.Route("")]
         public HttpResponseMessage GetTracks()
         {
-            ServiceResponseBase resp = _trackService.GetTracks(new GetTracksRequest(User.Identity.GetUserId()));
+            GetTrackResponse resp = _trackService.GetTracks(new GetTracksRequest(User.Identity.GetUserId()));
             return Request.BuildResponse(resp);
         }
 
@@ -37,7 +37,7 @@ namespace SoundTrackr.Web.Controllers.API
         [System.Web.Http.Route("{userName}")]
         public HttpResponseMessage GetTracks(string userName)
         {
-            ServiceResponseBase resp = _trackService.GetTracks(new GetTracksRequest { UserName = userName });
+            GetTrackResponse resp = _trackService.GetTracks(new GetTracksRequest { UserName = userName });
             return Request.BuildResponse(resp);
         }
     }
