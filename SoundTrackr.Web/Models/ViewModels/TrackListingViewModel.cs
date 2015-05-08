@@ -6,8 +6,9 @@ using System.Web;
 
 namespace SoundTrackr.Web.Models.ViewModels
 {
-    public class TrackViewModel : ViewModelBase
+    public class TrackListingViewModel : ViewModelBase
     {
-        public FeatureCollection FeatureCollection { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
