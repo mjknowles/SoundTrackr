@@ -5,34 +5,35 @@
 <html lang="en" ng-app="soundTrackrApp">
 <head>
     <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
+    @Scripts.Render("~/bundles/modernizr")
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+    <!-- http://cloudspace.com/blog/2014/03/27/backend-less-development-with-angular/#.VVLMHflVikp -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-mocks.js"></script>
+    <script src="/Scripts/app/apiFaker.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    @Styles.Render("~/Content/css")
 </head>
 <body>
-    <div id='map-four' class='map'> </div>
-    <script>
-        L.mapbox.accessToken = 'pk.eyJ1IjoibWprbm93bGVzMjMiLCJhIjoiQWJIb1d6NCJ9.3JZ_m3xjtutwqIMwSa-UXQ';
+    <div class="container main-content-container">
+        <div class="row main-content-row">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-8 map-col">
+                .colmd8
+                <div id='map-four' class='map'> </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            L.mapbox.accessToken = 'pk.eyJ1IjoibWprbm93bGVzMjMiLCJhIjoiQWJIb1d6NCJ9.3JZ_m3xjtutwqIMwSa-UXQ';
 
-        var map = L.mapbox.map('map-four', 'mapbox.streets', {
-            scrollWheelZoom: false
-        }).setView([38.8929, -77.0252], 14);
+            var map = L.mapbox.map('map-four', 'mapbox.streets', {
+                scrollWheelZoom: false
+            }).setView([38.8929, -77.0252], 14);
 
-        var myLayer = L.mapbox.featureLayer().addTo(map);
-        myLayer.setGeoJSON(geojson);
-    </script>
+            var myLayer = L.mapbox.featureLayer().addTo(map);
+            myLayer.setGeoJSON(geojson);
+        </script>
 </body>
 </html>

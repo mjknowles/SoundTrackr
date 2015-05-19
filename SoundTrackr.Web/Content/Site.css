@@ -1,6 +1,19 @@
-﻿body {
+﻿html {
+    height:100%;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    margin: 0;
+    height:100%;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,9 +22,21 @@
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.main-content-container {
+    height: 100%;
+}
+
+.main-content-row {
+    height: 100%;
+}
+
+.map-col {
+    height:100%;
 }
