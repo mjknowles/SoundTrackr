@@ -11,6 +11,6 @@
       .config(['$provide', function ($provide) {
           $provide.decorator('$httpBackend', ng.mock.e2e.$httpBackendDecorator);
       }]).run(['$httpBackend', function ($httpBackend) {
-          $httpBackend.whenGET('/api/tracks/testuser').respond(tracks);
+          $httpBackend.whenGET('/api/tracks').respond(tracks);
       }]);
 })(angular);

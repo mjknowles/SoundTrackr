@@ -4,14 +4,14 @@
 
 var soundTrackrServices = angular.module('soundTrackrServices', ['ngResource']);
 
-soundTrackrServices.factory('Track', ['$resource',
+soundTrackrServices.factory('TrackAPI', ['$resource',
   function ($resource) {
       return {
           track: $resource('/api/tracks/:trackId', {}, {
-              query: { method: 'GET', params: { trackId: '' }, isArray: false }
+              query: { method: 'GET', params: { trackId: '1' }, isArray: false }
           }),
           tracks: $resource('/api/tracks/:userName', {}, {
-              query: { method: 'GET', params: { userName: 'testuser' }, isArray: false }
+              query: { method: 'GET', params: { userName: '' }, isArray: true }
           }),
       };
   }]);

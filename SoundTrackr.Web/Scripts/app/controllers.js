@@ -20,10 +20,20 @@ var soundTrackrControllers = angular.module('soundTrackrControllers', []);
       }
   }]);
  */
-soundTrackrControllers.controller('TracksCtrl', ['$scope', 'Track',
-  function ($scope, Track) {
+
+soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI',
+  function ($scope, TrackAPI) {
        /*Track.get(function (resp) {
           //$scope.geojson = [resp];
         });*/
-      $scope.tracks = Track.query();
+      L.mapbox.accessToken = 'pk.eyJ1IjoibWprbm93bGVzMjMiLCJhIjoiQWJIb1d6NCJ9.3JZ_m3xjtutwqIMwSa-UXQ';
+
+      var map = L.mapbox.map('map-four', 'mapbox.streets', {
+          scrollWheelZoom: false
+      }).setView([38.8929, -77.0252], 14);
+
+      var myLayer = L.mapbox.featureLayer().addTo(map);
+      //myLayer.setGeoJSON(geojson);
+
+      $scope.tracks = TrackAPI.tracks.query();
   }]);

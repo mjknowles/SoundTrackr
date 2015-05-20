@@ -23,6 +23,13 @@ namespace SoundTrackr.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                      "~/Scripts/vendor/angular.js",
+                      "~/Scripts/vendor/angular-resource.js",
+                      "~/Scripts/vendor/angular-mocks.js",
+                      "~/Scripts/app/*.js",
+                      "~/Scripts/apiFaker/*.js"));
         }
     }
 }
