@@ -1,4 +1,5 @@
 ﻿using SoundTrackr.Service.Messaging;
+using SoundTrackr.Web.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

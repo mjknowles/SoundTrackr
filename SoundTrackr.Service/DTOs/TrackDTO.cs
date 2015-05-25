@@ -9,6 +9,7 @@ namespace SoundTrackr.Service.DTOs
     public class TrackDTO
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public DateTime TrackStart { get; set; }
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }

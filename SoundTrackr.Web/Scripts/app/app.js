@@ -1,8 +1,6 @@
 ﻿'use strict';
 
-var soundTrackrApp = angular.module('soundTrackrApp', []);
-
-var soundTrackrApp = angular.module('soundTrackrApp', [
-  'soundTrackrControllers',
-  'soundTrackrServices'
+var soundTrackrApp = angular.module('SoundTrackrApp', [
+  'SoundTrackrControllers',
+  'SoundTrackrServices'
 ]);

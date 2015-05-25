@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var soundTrackrControllers = angular.module('soundTrackrControllers', []);
+var soundTrackrControllers = angular.module('SoundTrackrControllers', []);
 
 /*phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
   function ($scope, Phone) {
@@ -21,19 +21,20 @@ var soundTrackrControllers = angular.module('soundTrackrControllers', []);
   }]);
  */
 
-soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI',
-  function ($scope, TrackAPI) {
-       /*Track.get(function (resp) {
-          //$scope.geojson = [resp];
-        });*/
+soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI', 'UserTrackNames',
+  function ($scope, TrackAPI, UserTrackNames) {
+      $scope.trackNames = UserTrackNames;
       L.mapbox.accessToken = 'pk.eyJ1IjoibWprbm93bGVzMjMiLCJhIjoiQWJIb1d6NCJ9.3JZ_m3xjtutwqIMwSa-UXQ';
 
       var map = L.mapbox.map('map-four', 'mapbox.streets', {
           scrollWheelZoom: false
-      }).setView([38.8929, -77.0252], 14);
+      });
 
       var myLayer = L.mapbox.featureLayer().addTo(map);
-      //myLayer.setGeoJSON(geojson);
-
-      $scope.tracks = TrackAPI.tracks.query();
+      $scope.getTrack = function getTrack(id) {
+          TrackAPI.track.query({trackId: id}, function (resp) {
+              myLayer.setGeoJSON(resp.GeoJson);
+              map.setView(new Array(resp.GeoJson.features[0].geometry.coordinates[1], resp.GeoJson.features[0].geometry.coordinates[0]), 14);
+          });
+      };
   }]);

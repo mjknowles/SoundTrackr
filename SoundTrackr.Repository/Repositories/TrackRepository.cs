@@ -19,7 +19,12 @@ namespace SoundTrackr.Repository.Repositories
 
         public Track GetTrackById(int id)
         {
-            return this.FindById(id);
+            return ConvertToDomain(_context.Set<TrackDb>().Include(t => t.TrackStats).SingleOrDefault(t => t.Id.Equals(id)));
+        }
+
+        public List<Track> GetAllTracks()
+        {
+            return ConvertToDomainList(_context.Set<TrackDb>().Include(t => t.TrackStats).ToList());
         }
 
         public List<Track> GetTracksByUserId(string userId)
@@ -34,32 +39,42 @@ namespace SoundTrackr.Repository.Repositories
 
         public override Track ConvertToDomain(TrackDb trackDb)
         {
-            Track track = new Track()
+            if (trackDb != null)
             {
-                TrackStart = trackDb.TrackStart,
-                TrackEnd = trackDb.TrackEnd,
-                StartCity = trackDb.StartCity,
-                StartState = trackDb.StartState,
-                UserId = trackDb.UserId,
-                TrackStats = new List<TrackStat>()
-            };
-            foreach(TrackStatDb tsdb in trackDb.TrackStats)
-            {
-                track.TrackStats.Add(new TrackStat()
+                Track track = new Track()
                 {
-                    Song = tsdb.Song,
-                    Timestamp = tsdb.Timestamp,
-                    Artist = tsdb.Artist,
-                    Location = new Location(Convert.ToString(tsdb.Location.Latitude), Convert.ToString(tsdb.Location.Longitude))
-                });
+                    Id = trackDb.Id,
+                    Name = trackDb.Name,
+                    TrackStart = trackDb.TrackStart,
+                    TrackEnd = trackDb.TrackEnd,
+                    StartCity = trackDb.StartCity,
+                    StartState = trackDb.StartState,
+                    UserId = trackDb.UserId,
+                    TrackStats = new List<TrackStat>()
+                };
+                foreach (TrackStatDb tsdb in trackDb.TrackStats)
+                {
+                    track.TrackStats.Add(new TrackStat()
+                    {
+                        Id = tsdb.Id,
+                        Song = tsdb.Song,
+                        Timestamp = tsdb.Timestamp,
+                        Artist = tsdb.Artist,
+                        Location = new Location(Convert.ToString(tsdb.Location.Latitude), Convert.ToString(tsdb.Location.Longitude))
+                    });
+                }
+                return track;
             }
-            return track;
+            else
+                return new Track{ TrackStats = new List<TrackStat>() };
         }
 
         public override TrackDb ConvertToDatabase(Track track)
         {
             TrackDb trackDb = new TrackDb()
             {
+                Id = track.Id,
+                Name = track.Name,
                 TrackStart = track.TrackStart,
                 TrackEnd = track.TrackEnd,
                 StartCity = track.StartCity,
@@ -75,6 +90,7 @@ namespace SoundTrackr.Repository.Repositories
 
                 trackDb.TrackStats.Add(new TrackStatDb()
                 {
+                    Id = ts.Id,
                     Song = ts.Song,
                     Timestamp = ts.Timestamp,
                     Artist = ts.Artist,

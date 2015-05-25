@@ -55,9 +55,13 @@ namespace SoundTrackr.Service.Track
                 {
                     tracks = _trackServiceRepoAccessor.GetTracksByUserId(getTracksRequest.UserId);
                 }
-                else 
+                else if(!String.IsNullOrEmpty(getTracksRequest.UserId))
                 {
                     tracks = _trackServiceRepoAccessor.GetTracksByUserName(getTracksRequest.UserName);
+                }
+                else
+                {
+                    tracks = _trackServiceRepoAccessor.GetAllTracks();
                 }
                 if (tracks == null)
                 {

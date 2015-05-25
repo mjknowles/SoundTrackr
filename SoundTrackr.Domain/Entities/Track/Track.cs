@@ -9,6 +9,7 @@ namespace SoundTrackr.Domain.Entities.Track
 {
     public class Track : EntityBase<int>, IAggregateRoot
     {
+        public string Name { get; set; }
         public DateTime TrackStart { get; set; }
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }

@@ -28,8 +28,8 @@ namespace SoundTrackr.Web
                       "~/Scripts/vendor/angular.js",
                       "~/Scripts/vendor/angular-resource.js",
                       "~/Scripts/vendor/angular-mocks.js",
-                      "~/Scripts/app/*.js",
-                      "~/Scripts/apiFaker/*.js"));
+                      "~/Scripts/app/*.js"));
+                      //"~/Scripts/apiFaker/*.js"));
         }
     }
 }

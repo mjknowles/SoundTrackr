@@ -9,6 +9,7 @@ namespace SoundTrackr.Repository.DatabaseModels
 {
     public class TrackDb : GenericDb
     {
+        public string Name { get; set; } 
         public DateTime TrackStart { get; set; }
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }

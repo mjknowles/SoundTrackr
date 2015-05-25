@@ -1,8 +1,10 @@
-﻿@{
+﻿@model SoundTrackr.Web.Models.ViewModels.TracksViewModel
+
+@{
     Layout = null;
 }
 <!DOCTYPE html>
-<html lang="en" ng-app="soundTrackrApp">
+<html lang="en" ng-app="SoundTrackrApp">
 <head>
     <meta charset=utf-8 />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,12 +19,21 @@
 <body>
     <div class="container main-content-container" ng-controller="TracksCtrl">
         <div class="row main-content-row">
-            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a href="#" class="list-group-item" ng-repeat="track in trackNames" ng-click="getTrack(track.Id)">
+                        {{track.Name}}
+                    </a>
+                </div>
+            </div>
             <div class="col-md-8 map-col">
                 .colmd8
                 <div id='map-four' class='map'> </div>
             </div>
         </div>
     </div>
-</body>
+    <script>
+        soundTrackrApp.value('UserTrackNames', @Html.Raw(Json.Encode(Model.TrackNames)))
+   </script>
+  </body>
 </html>

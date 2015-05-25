@@ -7,7 +7,7 @@
       { title: 'Around the Block', id: 3 }
     ];
 
-    ng.module('soundTrackrApp')
+    ng.module('SoundTrackrApp')
       .config(['$provide', function ($provide) {
           $provide.decorator('$httpBackend', ng.mock.e2e.$httpBackendDecorator);
       }]).run(['$httpBackend', function ($httpBackend) {

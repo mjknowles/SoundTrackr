@@ -18,6 +18,7 @@ namespace SoundTrackr.Service.DTOs.DTOConversions
             return new TrackDTO
             {
                 Id = t.Id,
+                Name = t.Name,
                 StartCity = t.StartCity,
                 StartState = t.StartState,
                 TrackStart = t.TrackStart,

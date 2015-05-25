@@ -30,7 +30,7 @@ namespace SoundTrackr.Repository.Repositories
         public virtual DomainType FindById(IdType id)
         {
             DomainType domainObj;
-            domainObj = ConvertToDomain(_context.Set<DbType>().SingleOrDefault<DbType>(x => x.Id.Equals(id)));
+            domainObj = ConvertToDomain(_context.Set<DbType>().Find(id));
 
             if (domainObj != null)
             {

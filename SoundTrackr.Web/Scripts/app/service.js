@@ -2,7 +2,7 @@
 
 /* Services */
 
-var soundTrackrServices = angular.module('soundTrackrServices', ['ngResource']);
+var soundTrackrServices = angular.module('SoundTrackrServices', ['ngResource']);
 
 soundTrackrServices.factory('TrackAPI', ['$resource',
   function ($resource) {
