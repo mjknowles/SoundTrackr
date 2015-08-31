@@ -11,6 +11,8 @@ using SoundTrackr.Common.Domain;
 using SoundTrackr.Domain.Entities.Track;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
+using SoundTrackr.Repository.Context;
+using SoundTrackr.Repository.DatabaseModels;
 
 namespace SoundTrackr.Web.Tests.Repositories
 {
@@ -21,16 +23,24 @@ namespace SoundTrackr.Web.Tests.Repositories
         }
     }
 
-    public class TestEntityDb : EntityBase<int>, IAggregateRoot
+    // TODO: Actually implement this
+    public class TestEntityDb : GenericDb<int, TestEntity>, IAggregateRoot
     {
-        protected override void Validate()
+        public override TestEntity ConvertToDomain()
         {
+            return new TestEntity();
         }
     }
 
     public class TestGenericRepo : GenericDomainTypeRepository<TestEntity, TestEntityDb, int> 
     {
         public TestGenericRepo(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory) : base(unitOfWork, dbContextFactory) { }
+
+        // TODO: Implement a real test version of this
+        public override TestEntity FindById(int id)
+        {
+            return new TestEntity();
+        }
     }
 
     [TestClass]
