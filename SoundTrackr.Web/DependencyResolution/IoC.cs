@@ -20,10 +20,11 @@ namespace SoundTrackr.Web.DependencyResolution {
     using SoundTrackr.Common.Domain;
     using SoundTrackr.Common.UnitOfWork;
     using SoundTrackr.Domain.Entities.Track;
+    using Repository.Context;
     using SoundTrackr.Repository.Repositories;
     using SoundTrackr.Service.Track;
     using StructureMap;
-	
+
     public static class IoC {
         public static IContainer Initialize() {
             ObjectFactory.Initialize(x =>
@@ -37,6 +38,8 @@ namespace SoundTrackr.Web.DependencyResolution {
                     scan.WithDefaultConventions();
                 });
                 x.For<IUnitOfWork>().Use<SoundTrackr.Repository.EfUnitOfWork>();
+                x.For<IDbContextFactory>().Use<SoundTrackr.Repository.Context.SoundTrackrContextFactory>();
+
             });
             return ObjectFactory.Container;
         }

@@ -11,6 +11,7 @@ using Owin;
 using SoundTrackr.Web.Providers;
 using SoundTrackr.Web.Models;
 using SoundTrackr.Repository;
+using SoundTrackr.Repository.Context;
 
 namespace SoundTrackr.Web
 {

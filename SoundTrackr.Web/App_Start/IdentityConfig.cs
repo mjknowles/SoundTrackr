@@ -6,6 +6,7 @@ using Microsoft.Owin;
 using SoundTrackr.Web.Models;
 using SoundTrackr.Repository;
 using SoundTrackr.Repository.DatabaseModels;
+using SoundTrackr.Repository.Context;
 
 namespace SoundTrackr.Web
 {
