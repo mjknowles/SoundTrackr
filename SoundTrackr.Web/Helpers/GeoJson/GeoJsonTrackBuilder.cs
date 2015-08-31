@@ -19,21 +19,29 @@ namespace SoundTrackr.Web.Helpers.GeoJson
 
             var startProps = CreatePointFeatureProperties(resp.Track.TrackStats[0], "Start", "#9c89cc", "medium", "building");
             var startPoint = new Feature(new Point(new GeographicPosition(resp.Track.TrackStats[0].Location.Latitude, resp.Track.TrackStats[0].Location.Longitude)), startProps);
-        
+
             var endProps = CreatePointFeatureProperties(resp.Track.TrackStats[lastTrackStatIndex], "End", "#9c89cc", "medium", "building");
             var endPoint = new Feature(new Point(new GeographicPosition(resp.Track.TrackStats[lastTrackStatIndex].Location.Latitude, resp.Track.TrackStats[lastTrackStatIndex].Location.Longitude)), endProps);
 
             var lineProps = CreateLineStringFeatureProperties("#fa946e", 1, 6);
             var lineCoords = new List<IPosition>();
-            foreach(var ts in resp.Track.TrackStats)
+            foreach (var ts in resp.Track.TrackStats)
             {
                 lineCoords.Add(new GeographicPosition(ts.Location.Latitude, ts.Location.Longitude));
             }
             var line = new Feature(new LineString(new List<IPosition>(lineCoords)), lineProps);
 
-            return new GeoJsonDTO { GeoJson = new FeatureCollection(
-                new List<Feature> {startPoint, endPoint, line}
-            )};
+            return new GeoJsonDTO
+            {
+                GeoJsonLayers = new List<GeoJsonDetails>()
+                {
+                    new GeoJsonDetails
+                    {
+                        GeoJsonObject = new FeatureCollection(new List<Feature> { startPoint, endPoint, line })
+                    }
+                }
+            };
+
         }
 
         private static LineStringFeatureProperties CreateLineStringFeatureProperties(string stroke, int strokeOpacity, int strokeWidth)
