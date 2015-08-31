@@ -79,7 +79,7 @@
     <Compile Include="Domain\IAggregateRootRepository.cs" />
     <Compile Include="Domain\IReadOnlyAggregateRootRepository.cs" />
     <Compile Include="Domain\ValueObjectBase.cs" />
-    <Compile Include="IUnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

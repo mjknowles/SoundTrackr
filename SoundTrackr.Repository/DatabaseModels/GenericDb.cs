@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace SoundTrackr.Repository.DatabaseModels
 {
-    public class GenericDb : IAggregateRoot
+    public abstract class GenericDb<IdType, DomainType> : IAggregateRoot
     {
-        public int Id { get; set; }
+        public IdType Id { get; set; }
+        public abstract DomainType ConvertToDomain();
     }
+
 }

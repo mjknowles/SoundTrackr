@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace SoundTrackr.Repository
+namespace SoundTrackr.Repository.Context
 {
-    public class DbContextFactory : IDbContextFactory
+    public class SoundTrackrContextFactory : IDbContextFactory
     {
         private string _dataContextKey = "EfObjectContext";
 

@@ -12,6 +12,11 @@ namespace SoundTrackr.Domain.Entities.User
         public string UserName { get; set; }
         public List<Track.Track> Tracks { get; set; }
 
+        public User()
+        {
+            Tracks = new List<Track.Track>();
+        }
+
         protected override void Validate()
         {
         }

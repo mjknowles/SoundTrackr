@@ -1,5 +1,6 @@
 ﻿using SoundTrackr.Common.Domain;
 using SoundTrackr.Common.UnitOfWork;
+using SoundTrackr.Repository.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

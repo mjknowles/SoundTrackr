@@ -22,7 +22,7 @@ namespace SoundTrackr.Domain.Entities.Track
 
         public Track GetTrack(int id)
         {
-            return _trackRepository.GetTrackById(id);
+            return _trackRepository.FindById(id);
         }
 
         public List<Track> GetAllTracks()

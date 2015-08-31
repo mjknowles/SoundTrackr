@@ -7,14 +7,14 @@ namespace SoundTrackr.Repository.Migrations
     using System.Data.Entity.Spatial;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SoundTrackr.Repository.SoundTrackrContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SoundTrackr.Repository.Context.SoundTrackrContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(SoundTrackr.Repository.SoundTrackrContext context)
+        protected override void Seed(SoundTrackr.Repository.Context.SoundTrackrContext context)
         {
             //  This method will be called after migrating to the latest version.
 

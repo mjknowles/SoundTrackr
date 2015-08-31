@@ -1,5 +1,6 @@
 ﻿using SoundTrackr.Common.Domain;
 using SoundTrackr.Common.UnitOfWork;
+using SoundTrackr.Repository.Context;
 using SoundTrackr.Repository.DatabaseModels;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ using System.Threading.Tasks;
 namespace SoundTrackr.Repository.Repositories
 {
     public abstract class GenericDomainTypeRepository<DomainType, DbType, IdType>
-        where DomainType : EntityBase<IdType>, IAggregateRoot
-        where DbType : GenericDb
+        where DomainType : IAggregateRoot
+        where DbType : GenericDb<IdType, DomainType>
     {
         private readonly IUnitOfWork _unitOfWork;
         internal DbContext _context;
@@ -23,67 +24,39 @@ namespace SoundTrackr.Repository.Repositories
             if (unitOfWork == null) throw new ArgumentNullException("Unit of work");
             _unitOfWork = unitOfWork;
 
-            if (dbContextFactory == null) throw new ArgumentNullException("DbContextFactory");
+            if (dbContextFactory == null) throw new ArgumentNullException("SoundTrackrContextFactory");
             _context = dbContextFactory.Create();
-        }
-
-        public virtual DomainType FindById(IdType id)
-        {
-            DomainType domainObj;
-            domainObj = ConvertToDomain(_context.Set<DbType>().Find(id));
-
-            if (domainObj != null)
-            {
-                return domainObj;
-            }
-            return default(DomainType);
-        }
-
-        /// <summary>
-        /// Example:
-        /// IGenericDataRepository<Department> repository = new GenericAggregateRepository<Department>();
-        /// IList<Department> departments = repository.GetAll(d => d.Employees);
-        /// </summary>
-        /// <param name="navigationProperties"></param>
-        /// <returns></returns>
-        public virtual IEnumerable<DomainType> GetAll()
-        {
-            IQueryable<DbType> dbQuery = _context.Set<DbType>();
-            List<DbType> dbList = dbQuery.AsNoTracking().ToList<DbType>();
-            List<DomainType> domainList = new List<DomainType>();
-            foreach(DbType dt in dbList)
-            {
-                domainList.Add(ConvertToDomain(dt));
-            }
-            return domainList;
         }
 
         public virtual void Insert(DomainType item)
         {
-            _unitOfWork.RegisterInsertion(ConvertToDatabase(item));
+            _unitOfWork.RegisterInsertion(item);
         }
 
         public virtual void Update(DomainType item)
         {
-            _unitOfWork.RegisterUpdate(ConvertToDatabase(item));
+            _unitOfWork.RegisterUpdate(item);
         }
 
         public virtual void Delete(DomainType item)
         {
-            _unitOfWork.RegisterDeletion(ConvertToDatabase(item));
+            _unitOfWork.RegisterDeletion(item);
         }
 
-        public virtual List<DomainType> ConvertToDomainList(List<DbType> dbs)
+        public List<DomainType> ConvertToDomainList(List<DbType> dbs)
         {
-            List<DomainType> domainList = new List<DomainType>();
-            foreach(DbType db in dbs)
+            List<DomainType> dts = new List<DomainType>();
+            if (dbs != null)
             {
-                domainList.Add(ConvertToDomain(db));
+                foreach (DbType db in dbs)
+                {
+                    dts.Add(db.ConvertToDomain());
+                }
             }
-            return domainList;
+
+            return dts;
         }
 
-        public abstract DomainType ConvertToDomain(DbType db);
-        public abstract DbType ConvertToDatabase(DomainType dom); 
+        public abstract DomainType FindById(IdType id);
     }
 }

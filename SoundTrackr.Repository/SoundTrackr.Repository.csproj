@@ -57,9 +57,10 @@
     <Compile Include="DatabaseModels\TrackDb.cs" />
     <Compile Include="DatabaseModels\TrackStatDb.cs" />
     <Compile Include="DatabaseModels\UserDb.cs" />
-    <Compile Include="DbContextFactory.cs" />
+    <Compile Include="Context\SoundTrackrContextFactory.cs" />
     <Compile Include="EfUnitOfWork.cs" />
-    <Compile Include="IDbContextFactory.cs" />
+    <Compile Include="Context\IDbContextFactory.cs" />
+    <Compile Include="Helpers\DomainToDbConverters.cs" />
     <Compile Include="Migrations\201504192200596_InitialCreate.cs" />
     <Compile Include="Migrations\201504192200596_InitialCreate.Designer.cs">
       <DependentUpon>201504192200596_InitialCreate.cs</DependentUpon>
@@ -76,7 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericDomainTypeRepository.cs" />
     <Compile Include="Repositories\TrackRepository.cs" />
-    <Compile Include="SoundTrackrContext.cs" />
+    <Compile Include="Context\SoundTrackrContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoundTrackr.Common\SoundTrackr.Common.csproj">
@@ -103,6 +104,7 @@
       <DependentUpon>201505230502153_NameAddedToTrackDataModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

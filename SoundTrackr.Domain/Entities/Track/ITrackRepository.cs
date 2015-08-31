@@ -9,7 +9,6 @@ namespace SoundTrackr.Domain.Entities.Track
 {
     public interface ITrackRepository : IAggregateRootRepository<Track, int>
     {
-        Track GetTrackById(int id);
         List<Track> GetAllTracks();
         List<Track> GetTracksByUserId(string userId);
         List<Track> GetTracksByUserName(string userName);

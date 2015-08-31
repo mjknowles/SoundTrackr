@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundTrackr.Repository
+namespace SoundTrackr.Repository.Context
 {
     public class SoundTrackrContext : IdentityDbContext<UserDb>
     {
