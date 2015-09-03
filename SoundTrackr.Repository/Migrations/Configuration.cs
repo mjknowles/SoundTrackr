@@ -5,7 +5,9 @@ namespace SoundTrackr.Repository.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SoundTrackr.Repository.Context.SoundTrackrContext>
     {
@@ -29,10 +31,27 @@ namespace SoundTrackr.Repository.Migrations
             //    );
             //
 
+            context.Users.AddOrUpdate(
+                // password is testUser_1
+                new UserDb
+                {
+                    Id = "9feb9a5d-2906-42c5-adc1-9a106785f879",
+                    Email = "testuser@test.com",
+                    EmailConfirmed = false,
+                    PasswordHash = "AFNGxWiULuFWlfL/mxwYkUCQtNhLn+RRV5/5p6w6vdCESHqrgP1AWCkjK+CYvwoFNg==",
+                    SecurityStamp = "8f76743d - 1757 - 48ee - bfd1 - f9e0082a2956",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    UserName = "testuser@test.com"
+                }
+            );
+
             context.Tracks.AddOrUpdate(
                 new TrackDb
                 {
-                    UserId = "f176cb13-aaf6-49a4-ba34-a1ec65e3d358",
+                    UserId = "9feb9a5d-2906-42c5-adc1-9a106785f879",
                     Name = "Nash to Bham",
                     TrackStart = DateTime.Now,
                     TrackEnd = DateTime.Now.AddMinutes(2),
@@ -46,7 +65,7 @@ namespace SoundTrackr.Repository.Migrations
                 },
                 new TrackDb
                 {
-                    UserId = "f176cb13-aaf6-49a4-ba34-a1ec65e3d358",
+                    UserId = "9feb9a5d-2906-42c5-adc1-9a106785f879",
                     Name = "Apt to Taco Mamacita",
                     TrackStart = DateTime.Now.AddMinutes(60),
                     TrackEnd = DateTime.Now.AddMinutes(64),
@@ -60,7 +79,7 @@ namespace SoundTrackr.Repository.Migrations
                 },
                 new TrackDb
                 {
-                    UserId = "f176cb13-aaf6-49a4-ba34-a1ec65e3d358",
+                    UserId = "9feb9a5d-2906-42c5-adc1-9a106785f879",
                     Name = "Apt to Satco",
                     TrackStart = DateTime.Now.AddMinutes(120),
                     TrackEnd = DateTime.Now.AddMinutes(124),
@@ -72,6 +91,39 @@ namespace SoundTrackr.Repository.Migrations
                         new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799449 36.146701)", 4326), Timestamp = DateTime.Now.AddMinutes(124), Song = "Walkin on a Pretty Day", Artist = "Kurt Vile" }
                     }                    
                 });
+
+            SaveChanges(context);
+        }
+
+        /// <summary>
+        /// Wrapper for SaveChanges adding the Validation Messages to the generated exception
+        /// </summary>
+        /// <param name="context">The context.</param>
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
         }
     }
 }
