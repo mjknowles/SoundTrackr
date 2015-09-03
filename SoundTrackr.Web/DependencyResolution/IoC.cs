@@ -24,6 +24,12 @@ namespace SoundTrackr.Web.DependencyResolution {
     using SoundTrackr.Repository.Repositories;
     using SoundTrackr.Service.Track;
     using StructureMap;
+    using Microsoft.AspNet.Identity;
+    using System.Data.Entity;
+    using Microsoft.Owin.Security;
+    using Repository.DatabaseModels;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Web;
 
     public static class IoC {
         public static IContainer Initialize() {
@@ -39,7 +45,9 @@ namespace SoundTrackr.Web.DependencyResolution {
                 });
                 x.For<IUnitOfWork>().Use<SoundTrackr.Repository.EfUnitOfWork>();
                 x.For<IDbContextFactory>().Use<SoundTrackr.Repository.Context.SoundTrackrContextFactory>();
-
+                x.For<IUserStore<UserDb>>().Use<UserStore<UserDb>>();
+                x.For<DbContext>().Use(() => new SoundTrackrContext());
+                x.For<IAuthenticationManager>().Use(() => HttpContext.Current.GetOwinContext().Authentication);
             });
             return ObjectFactory.Container;
         }
