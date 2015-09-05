@@ -48,7 +48,7 @@ namespace SoundTrackr.Repository.Migrations
                 }
             );
 
-            context.Tracks.AddOrUpdate(
+            context.Tracks.AddOrUpdate( t => t.Name,
                 new TrackDb
                 {
                     UserId = "9feb9a5d-2906-42c5-adc1-9a106785f879",
