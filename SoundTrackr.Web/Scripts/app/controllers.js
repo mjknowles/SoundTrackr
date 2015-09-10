@@ -31,10 +31,11 @@ soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI', 'UserTrac
       });
 
       var myLayer = L.mapbox.featureLayer().addTo(map);
+
       $scope.getTrack = function getTrack(id) {
           TrackAPI.track.query({trackId: id}, function (resp) {
               myLayer.setGeoJSON(resp.GeoJsonLayers[0].GeoJsonObject);
-              map.setView(new Array(resp.GeoJsonLayers[0].GeoJsonObject.features[0].geometry.coordinates[1], resp.GeoJson.features[0].geometry.coordinates[0]), 14);
+              map.setView(new Array(resp.GeoJsonLayers[0].GeoJsonObject.features[0].geometry.coordinates[1], resp.GeoJsonLayers[0].GeoJsonObject.features[0].geometry.coordinates[0]), 14);
           });
       };
   }]);
