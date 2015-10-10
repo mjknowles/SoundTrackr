@@ -14,7 +14,7 @@ namespace SoundTrackr.Domain.Entities.Track
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }
         public string StartState { get; set; }
-        public List<TrackStat.TrackStat> TrackStats { get; set; }
+        public List<SubTrack.SubTrack> SubTracks { get; set; }
         public string UserId { get; set; }
 
         public Track() { }

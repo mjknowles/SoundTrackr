@@ -1,7 +1,8 @@
 namespace SoundTrackr.Repository.Migrations
 {
-    using SoundTrackr.Repository.DatabaseModels;
+    using DatabaseModels;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Spatial;
@@ -48,20 +49,34 @@ namespace SoundTrackr.Repository.Migrations
                 }
             );
 
-            context.Tracks.AddOrUpdate( t => t.Name,
+            context.Tracks.AddOrUpdate(t => t.Name,
                 new TrackDb
                 {
                     UserId = "9feb9a5d-2906-42c5-adc1-9a106785f879",
                     Name = "Nash to Bham",
                     TrackStart = DateTime.Now,
                     TrackEnd = DateTime.Now.AddMinutes(2),
-                    TrackStats = new System.Collections.Generic.List<TrackStatDb>
+                    SubTracks = new List<SubTrackDb>
                     {
-                        
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.527409 33.656415)", 4326), Timestamp = DateTime.Now, Song = "Sleepwalking", Artist = "Chain Gang of 1974" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.939557 34.787571)", 4326), Timestamp = DateTime.Now.AddMinutes(1), Song = "Throw It Up", Artist = "Yelawolf" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795120 36.145660)", 4326), Timestamp = DateTime.Now.AddMinutes(2), Song = "10 Bands", Artist = "Drake" }
-                    }                    
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now,
+                            Artist = "Chain Gang of 1974",
+                            Song = "Sleepwalking",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.527409 33.656415)", 4326), Timestamp = DateTime.Now },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.939557 34.787571)", 4326), Timestamp = DateTime.Now.AddMinutes(1) },
+                            }
+                        },
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now,
+                            Artist = "Drake",
+                            Song = "10 Bands",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.939557 34.787571)", 4326), Timestamp = DateTime.Now.AddMinutes(1) },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795120 36.145660)", 4326), Timestamp = DateTime.Now.AddMinutes(2) }
+                            }
+                        }
+                    }
                 },
                 new TrackDb
                 {
@@ -69,13 +84,27 @@ namespace SoundTrackr.Repository.Migrations
                     Name = "Apt to Taco Mamacita",
                     TrackStart = DateTime.Now.AddMinutes(60),
                     TrackEnd = DateTime.Now.AddMinutes(64),
-                    TrackStats = new System.Collections.Generic.List<TrackStatDb>
+                    SubTracks = new List<SubTrackDb>
                     {
-                        
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795372 36.145263)", 4326), Timestamp = DateTime.Now.AddMinutes(60), Song = "All Day", Artist = "Kanye West" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795672 36.143669)", 4326), Timestamp = DateTime.Now.AddMinutes(62), Song = "Seasons", Artist = "Future Islands" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.791488 36.143218)", 4326), Timestamp = DateTime.Now.AddMinutes(64), Song = "Peaches", Artist = "In the Valley Below" }
-                    }                    
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now.AddMinutes(60),
+                            Artist = "Future Islands",
+                            Song = "Seasons",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795372 36.145263)", 4326), Timestamp = DateTime.Now.AddMinutes(60) },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795672 36.143669)", 4326), Timestamp = DateTime.Now.AddMinutes(62) },
+                            }
+                        },
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now.AddMinutes(60),
+                            Artist = "In the Valley Below",
+                            Song = "Peaches",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795672 36.143669)", 4326), Timestamp = DateTime.Now.AddMinutes(62) },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.791488 36.143218)", 4326), Timestamp = DateTime.Now.AddMinutes(64) }
+                            }
+                        }
+                    }
                 },
                 new TrackDb
                 {
@@ -83,13 +112,27 @@ namespace SoundTrackr.Repository.Migrations
                     Name = "Apt to Satco",
                     TrackStart = DateTime.Now.AddMinutes(120),
                     TrackEnd = DateTime.Now.AddMinutes(124),
-                    TrackStats = new System.Collections.Generic.List<TrackStatDb>
+                    SubTracks = new List<SubTrackDb>
                     {
-                        
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795372 36.145263)", 4326), Timestamp = DateTime.Now.AddMinutes(120), Song = "Busy Earnin'", Artist = "Jungle" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799513 36.146078)", 4326), Timestamp = DateTime.Now.AddMinutes(122), Song = "My Type", Artist = "Saint Motel" },
-                        new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799449 36.146701)", 4326), Timestamp = DateTime.Now.AddMinutes(124), Song = "Walkin on a Pretty Day", Artist = "Kurt Vile" }
-                    }                    
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now.AddMinutes(120),
+                            Artist = "Jungle",
+                            Song = "Busy Earnin",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.795372 36.145263)", 4326), Timestamp = DateTime.Now.AddMinutes(120) },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799513 36.146078)", 4326), Timestamp = DateTime.Now.AddMinutes(122) },
+                            }
+                        },
+                        new SubTrackDb {
+                            StartTimestamp = DateTime.Now.AddMinutes(120),
+                            Artist = "Kurt Vile",
+                            Song = "Walkin on a Pretty Day",
+                            TrackStats = new List<TrackStatDb> {
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799513 36.146078)", 4326), Timestamp = DateTime.Now.AddMinutes(122) },
+                                new TrackStatDb{Location = DbGeography.FromText("POINT(-86.799449 36.146701)", 4326), Timestamp = DateTime.Now.AddMinutes(124) }
+                            }
+                        }
+                    }
                 });
 
             SaveChanges(context);

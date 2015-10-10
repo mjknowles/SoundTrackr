@@ -1,4 +1,5 @@
-﻿using SoundTrackr.Domain.Entities.Track;
+﻿using SoundTrackr.Domain.Entities.SubTrack;
+using SoundTrackr.Domain.Entities.Track;
 using SoundTrackr.Domain.Entities.TrackStat;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SoundTrackr.Repository.DatabaseModels
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }
         public string StartState { get; set; }
-        public List<TrackStatDb> TrackStats { get; set; }
+        public List<SubTrackDb> SubTracks { get; set; }
         [MaxLength(128)]
         public string  UserId { get; set; }
 
@@ -33,12 +34,12 @@ namespace SoundTrackr.Repository.DatabaseModels
                 TrackStart = TrackStart,
                 TrackEnd = TrackEnd,
                 UserId = UserId,
-                TrackStats = new List<TrackStat>()
+                SubTracks = new List<SubTrack>()
             };
 
-            foreach (TrackStatDb tsdb in TrackStats)
+            foreach (SubTrackDb stdb in SubTracks)
             {
-                track.TrackStats.Add(tsdb.ConvertToDomain());
+                track.SubTracks.Add(stdb.ConvertToDomain());
             }
 
             return track;

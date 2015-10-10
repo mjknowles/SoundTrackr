@@ -12,8 +12,6 @@ namespace SoundTrackr.Repository.DatabaseModels
 {
     public class TrackStatDb : GenericDb<int, TrackStat>
     {
-        public string Song { get; set; }
-        public string Artist { get; set; }
         public DbGeography Location { get; set; }
         public DateTime Timestamp { get; set; }
 
@@ -21,10 +19,8 @@ namespace SoundTrackr.Repository.DatabaseModels
         {
             return new TrackStat
             {
-                Artist = Artist,
                 Id = Id,
                 Location = new Location(Convert.ToString(Location.Latitude), Convert.ToString(Location.Longitude)),
-                Song = Song,
                 Timestamp = Timestamp
             };
         }

@@ -21,22 +21,22 @@ namespace SoundTrackr.Repository.Repositories
 
         public override Track FindById(int id)
         {
-            return _context.Set<TrackDb>().Include(t => t.TrackStats).SingleOrDefault(t => t.Id.Equals(id)).ConvertToDomain();
+            return _context.Set<TrackDb>().Include(s => s.SubTracks.Select(t => t.TrackStats)).SingleOrDefault(t => t.Id.Equals(id)).ConvertToDomain();
         }
 
         public List<Track> GetAllTracks()
         {
-            return ConvertToDomainList(_context.Set<TrackDb>().Include(t => t.TrackStats).ToList());
+            return ConvertToDomainList(_context.Set<TrackDb>().Include(s => s.SubTracks.Select(t => t.TrackStats)).ToList());
         }
 
         public List<Track> GetTracksByUserId(string userId)
         {
-            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).Include(t => t.TrackStats).ToList());
+            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.UserId == userId).Include(s => s.SubTracks.Select(t => t.TrackStats)).ToList());
         }
 
         public List<Track> GetTracksByUserName(string userName)
         {
-            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.User.UserName.ToLower().Equals(userName.ToLower())).Include(t => t.TrackStats).ToList());
+            return ConvertToDomainList(_context.Set<TrackDb>().Where(t => t.User.UserName.ToLower().Equals(userName.ToLower())).Include(s => s.SubTracks.Select(t => t.TrackStats)).ToList());
         }
 
     }

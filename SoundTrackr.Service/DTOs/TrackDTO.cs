@@ -14,6 +14,6 @@ namespace SoundTrackr.Service.DTOs
         public DateTime TrackEnd { get; set; }
         public string StartCity { get; set; }
         public string StartState { get; set; }
-        public List<TrackStatDTO> TrackStats { get; set; }
+        public List<SubTrackDTO> SubTracks { get; set; }
     }
 }

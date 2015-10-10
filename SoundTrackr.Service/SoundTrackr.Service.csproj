@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DTOs\DTOConversions\ConversionHelper.cs" />
     <Compile Include="DTOs\LocationDTO.cs" />
+    <Compile Include="DTOs\SubTrackDTO.cs" />
     <Compile Include="DTOs\TrackDTO.cs" />
     <Compile Include="DTOs\TrackStatDTO.cs" />
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />

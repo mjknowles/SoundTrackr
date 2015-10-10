@@ -7,13 +7,13 @@ namespace SoundTrackr.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class NameAddedToTrackDataModel : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(NameAddedToTrackDataModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505230502153_NameAddedToTrackDataModel"; }
+            get { return "201510100506314_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,12 +12,14 @@ namespace SoundTrackr.Web.Helpers.GeoJson
             IntializeLineStringFeatureProperties();
         }
 
-        public LineStringFeatureProperties(string stroke, int strokeOpacity, int strokeWidth)
+        public LineStringFeatureProperties(string stroke, int strokeOpacity, int strokeWidth, string song, string artist)
         {
             IntializeLineStringFeatureProperties();
             Stroke = stroke;
             StrokeOpacity = strokeOpacity;
             StrokeWidth = strokeWidth;
+            Song = song;
+            Artist = artist;
         }
 
         public void IntializeLineStringFeatureProperties()
@@ -25,7 +27,9 @@ namespace SoundTrackr.Web.Helpers.GeoJson
             FeatureProperties = new Dictionary<string, object> {
                 { "stroke", "" },
                 { "stroke-opacity", "" },
-                { "stroke-width", "" }
+                { "stroke-width", "" },
+                { "song", "" },
+                {"artist", "" }
             };
         }
 
@@ -33,6 +37,7 @@ namespace SoundTrackr.Web.Helpers.GeoJson
         public string Stroke { get { return FeatureProperties["stroke"].ToString(); } set { FeatureProperties["stroke"] = value; } }
         public int StrokeOpacity { get { return (int)FeatureProperties["stroke-opacity"]; } set { FeatureProperties["stroke-opacity"] = value; } }
         public int StrokeWidth { get { return (int)FeatureProperties["stroke-width"]; } set { FeatureProperties["stroke-width"] = value; } }
-
+        public string Song { get { return FeatureProperties["song"].ToString(); } set { FeatureProperties["song"] = value; } }
+        public string Artist { get { return FeatureProperties["artist"].ToString(); } set { FeatureProperties["artist"] = value; } }
     }
 }

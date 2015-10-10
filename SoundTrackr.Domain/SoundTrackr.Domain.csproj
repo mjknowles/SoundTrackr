@@ -39,11 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\SubTrack\SubTrack.cs" />
     <Compile Include="Entities\TrackStat\TrackStat.cs" />
-    <Compile Include="Entities\Track\ITrackRepoAccessor.cs" />
     <Compile Include="Entities\Track\ITrackRepository.cs" />
     <Compile Include="Entities\Track\Track.cs" />
-    <Compile Include="Entities\Track\TrackRepoAccessor.cs" />
     <Compile Include="Entities\User\IUserRepository.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

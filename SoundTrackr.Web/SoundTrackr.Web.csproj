@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1094,6 +1095,7 @@
     <Content Include="Views\Home\Example2.cshtml" />
     <Content Include="Scripts\vendor\version.json" />
     <Content Include="Views\Tracks\Index.cshtml" />
+    <Content Include="Views\Home\Example3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

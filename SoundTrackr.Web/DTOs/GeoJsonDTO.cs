@@ -10,12 +10,11 @@ namespace SoundTrackr.Web.DTOs
 {
     public class GeoJsonDTO : ServiceResponseBase
     {
-        public List<GeoJsonDetails> GeoJsonLayers { get; set; }
-    }
+        public GeoJsonDTO() : base()
+        {
+            GeoJsonFeatures = new FeatureCollection();
+        }
 
-    public class GeoJsonDetails
-    {
-        public GeoJSONObject GeoJsonObject { get; set; }
-        public string PopupContent { get; set; }
+        public FeatureCollection GeoJsonFeatures { get; set; }
     }
 }

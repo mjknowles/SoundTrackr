@@ -13,12 +13,12 @@ namespace SoundTrackr.Service.Track
 {
     public class TrackService : ITrackService
     {
-        private readonly ITrackRepoAccessor _trackServiceRepoAccessor;
+        private readonly ITrackRepository _trackRepository;
 
-        public TrackService(ITrackRepoAccessor trackServiceRepoAccessor)
+        public TrackService(ITrackRepository trackRepository)
         {
-            if (trackServiceRepoAccessor == null) throw new ArgumentNullException("Track Repo Accessor");
-            _trackServiceRepoAccessor = trackServiceRepoAccessor;        
+            if (trackRepository == null) throw new ArgumentNullException("Track Repo");
+            _trackRepository = trackRepository;        
         }
 
         public GetTrackResponse GetTrack(GetTrackRequest getTrackRequest)
@@ -27,7 +27,7 @@ namespace SoundTrackr.Service.Track
             SoundTrackr.Domain.Entities.Track.Track track = null;
             try
             {
-                track = _trackServiceRepoAccessor.GetTrack(getTrackRequest.Id);
+                track = _trackRepository.FindById(getTrackRequest.Id);
                 if (track == null)
                 {
                     getTrackResponse.Exception = GetStandardTrackNotFoundException();
@@ -53,15 +53,15 @@ namespace SoundTrackr.Service.Track
             {
                 if(!String.IsNullOrEmpty(getTracksRequest.UserId))
                 {
-                    tracks = _trackServiceRepoAccessor.GetTracksByUserId(getTracksRequest.UserId);
+                    tracks = _trackRepository.GetTracksByUserId(getTracksRequest.UserId);
                 }
                 else if(!String.IsNullOrEmpty(getTracksRequest.UserId))
                 {
-                    tracks = _trackServiceRepoAccessor.GetTracksByUserName(getTracksRequest.UserName);
+                    tracks = _trackRepository.GetTracksByUserName(getTracksRequest.UserName);
                 }
                 else
                 {
-                    tracks = _trackServiceRepoAccessor.GetAllTracks();
+                    tracks = null;
                 }
                 if (tracks == null)
                 {
@@ -82,6 +82,12 @@ namespace SoundTrackr.Service.Track
             }
 
             return getTracksResponse;
+        }
+
+        //TODO: Create this sort method and call it
+        private SoundTrackr.Domain.Entities.Track.Track SortSubTracksAndTrackStatsByTimestamp(SoundTrackr.Domain.Entities.Track.Track track)
+        {
+            throw new NotImplementedException();
         }
 
         private ResourceNotFoundException GetStandardTrackNotFoundException()
