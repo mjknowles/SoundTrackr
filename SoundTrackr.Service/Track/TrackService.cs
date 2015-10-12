@@ -34,6 +34,7 @@ namespace SoundTrackr.Service.Track
                 }
                 else
                 {
+                    SortTrackStatsByTimestamp(track);
                     getTrackResponse.Track = track.ConvertToDTO();
                 }
             }
@@ -84,10 +85,12 @@ namespace SoundTrackr.Service.Track
             return getTracksResponse;
         }
 
-        //TODO: Create this sort method and call it
-        private SoundTrackr.Domain.Entities.Track.Track SortSubTracksAndTrackStatsByTimestamp(SoundTrackr.Domain.Entities.Track.Track track)
+        private void SortTrackStatsByTimestamp(SoundTrackr.Domain.Entities.Track.Track track)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < track.SubTracks.Count; i++)
+            {
+                track.SubTracks[i].TrackStats = track.SubTracks[i].TrackStats.OrderBy(ts => ts.Timestamp).ToList();
+            }
         }
 
         private ResourceNotFoundException GetStandardTrackNotFoundException()
