@@ -36,6 +36,11 @@ soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI', 'UserTrac
           TrackAPI.track.query({ trackId: id }, function (resp) {
 
               myLayer.setGeoJSON(resp.GeoJsonFeatures);
+              myLayer.eachLayer(function (layer) {
+                  console.log(layer);
+                  var content = '<p>Song: ' + layer.feature.properties.song + '<br \>Artist: ' + layer.feature.properties.artist + '</p>';
+                  layer.bindPopup(content);
+              });
               map.setView(new Array(resp.GeoJsonFeatures.features[0].geometry.coordinates[1], resp.GeoJsonFeatures.features[0].geometry.coordinates[0]), 14);
           });
       };

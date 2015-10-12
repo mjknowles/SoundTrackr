@@ -29,7 +29,7 @@ namespace SoundTrackr.Web.Helpers.GeoJson
                 { "stroke-opacity", "" },
                 { "stroke-width", "" },
                 { "song", "" },
-                {"artist", "" }
+                { "artist", "" }
             };
         }
 

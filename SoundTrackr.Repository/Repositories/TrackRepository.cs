@@ -24,6 +24,7 @@ namespace SoundTrackr.Repository.Repositories
             return _context.Set<TrackDb>().Include(s => s.SubTracks.Select(t => t.TrackStats)).SingleOrDefault(t => t.Id.Equals(id)).ConvertToDomain();
         }
 
+        // TODO: Modify to only return track names and IDs
         public List<Track> GetAllTracks()
         {
             return ConvertToDomainList(_context.Set<TrackDb>().Include(s => s.SubTracks.Select(t => t.TrackStats)).ToList());
