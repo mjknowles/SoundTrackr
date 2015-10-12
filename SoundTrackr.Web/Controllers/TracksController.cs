@@ -126,7 +126,8 @@ namespace SoundTrackr.Web.Controllers.MVC
         // GET: Tracks
         public ActionResult Index()
         {
-            GetTracksResponse resp = _trackService.GetTracks(new GetTracksRequest());
+            // TODO: remove this test string
+            GetTracksResponse resp = _trackService.GetTracks(new GetTracksRequest("9feb9a5d-2906-42c5-adc1-9a106785f879"));
             return View(new TracksViewModel(resp));
         }
 

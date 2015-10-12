@@ -25,11 +25,11 @@ namespace SoundTrackr.Web.Helpers.GeoJson
                 int lastTrackStatIndex = resp.Track.SubTracks[lastSubTrackIndex].TrackStats.Count - 1;
 
                 var startProps = CreatePointFeatureProperties(resp.Track.SubTracks[0].TrackStats[0], "Start", "#9c89cc", "medium", "building");
-                var startPoint = new Feature(new Point(new GeographicPosition(resp.Track.SubTracks[0].TrackStats[0].Location.Latitude, resp.Track.SubTracks[0].TrackStats[0].Location.Longitude)), startProps);
+                var startPoint = new Feature(new Point(new GeographicPosition(resp.Track.SubTracks[0].TrackStats[0].Location.Latitude, resp.Track.SubTracks[0].TrackStats[0].Location.Longitude)), startProps.FeatureProperties);
                 dto.GeoJsonFeatures.Features.Add(startPoint);
 
                 var endProps = CreatePointFeatureProperties(resp.Track.SubTracks[lastSubTrackIndex].TrackStats[lastTrackStatIndex], "End", "#9c89cc", "medium", "building");
-                var endPoint = new Feature(new Point(new GeographicPosition(resp.Track.SubTracks[lastSubTrackIndex].TrackStats[lastTrackStatIndex].Location.Latitude, resp.Track.SubTracks[lastSubTrackIndex].TrackStats[lastTrackStatIndex].Location.Longitude)), endProps);
+                var endPoint = new Feature(new Point(new GeographicPosition(resp.Track.SubTracks[lastSubTrackIndex].TrackStats[lastTrackStatIndex].Location.Latitude, resp.Track.SubTracks[lastSubTrackIndex].TrackStats[lastTrackStatIndex].Location.Longitude)), endProps.FeatureProperties);
                 dto.GeoJsonFeatures.Features.Add(endPoint);
 
                 // Create subtracks
@@ -48,14 +48,14 @@ namespace SoundTrackr.Web.Helpers.GeoJson
                     {
                         lineCoords.Add(new GeographicPosition(ts.Location.Latitude, ts.Location.Longitude));
                     }
-                    line = new Feature(new LineString(new List<IPosition>(lineCoords)), lineProps);
+                    line = new Feature(new LineString(new List<IPosition>(lineCoords)), lineProps.FeatureProperties);
                     dto.GeoJsonFeatures.Features.Add(line);
 
                     // If subtrack is first in list, then it doesn't need a start point since that's the beginning of the track
                     if (i != 0)
                     {
                         var subTrackStartProps = CreatePointFeatureProperties(resp.Track.SubTracks[0].TrackStats[0], "Start", "#9c89cc", "medium", "circle");
-                        var subTrackStart = new Feature(new Point(new GeographicPosition(st.TrackStats[0].Location.Latitude, st.TrackStats[0].Location.Longitude)), subTrackStartProps);
+                        var subTrackStart = new Feature(new Point(new GeographicPosition(st.TrackStats[0].Location.Latitude, st.TrackStats[0].Location.Longitude)), subTrackStartProps.FeatureProperties);
                         dto.GeoJsonFeatures.Features.Add(line);
                     }
                 }

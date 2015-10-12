@@ -23,7 +23,7 @@ namespace SoundTrackr.Web.Helpers.GeoJson
 
         public void IntializePointFeatureProperties()
         {
-            FeatureProperties = new Dictionary<string, string> {
+            FeatureProperties = new Dictionary<string, object> {
                 { "title", "" },
                 { "marker-color", "" },
                 { "marker-size", "" },
@@ -31,10 +31,10 @@ namespace SoundTrackr.Web.Helpers.GeoJson
             };
         }
 
-        public Dictionary<string, string> FeatureProperties { get; set; }
-        public string Title { get { return FeatureProperties["title"]; } set { FeatureProperties["title"] = value; } }
-        public string MarkerColor { get { return FeatureProperties["marker-color"]; } set { FeatureProperties["marker-color"] = value; } }
-        public string MarkerSize { get { return FeatureProperties["marker-size"]; } set { FeatureProperties["marker-size"] = value; } }
-        public string MarkerSymbol { get { return FeatureProperties["marker-symbol"]; } set { FeatureProperties["marker-symbol"] = value; } }
+        public Dictionary<string, object> FeatureProperties { get; set; }
+        public string Title { get { return FeatureProperties["title"].ToString(); } set { FeatureProperties["title"] = value; } }
+        public string MarkerColor { get { return FeatureProperties["marker-color"].ToString(); } set { FeatureProperties["marker-color"] = value; } }
+        public string MarkerSize { get { return FeatureProperties["marker-size"].ToString(); } set { FeatureProperties["marker-size"] = value; } }
+        public string MarkerSymbol { get { return FeatureProperties["marker-symbol"].ToString(); } set { FeatureProperties["marker-symbol"] = value; } }
     }
 }

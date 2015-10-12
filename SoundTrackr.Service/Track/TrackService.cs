@@ -55,7 +55,7 @@ namespace SoundTrackr.Service.Track
                 {
                     tracks = _trackRepository.GetTracksByUserId(getTracksRequest.UserId);
                 }
-                else if(!String.IsNullOrEmpty(getTracksRequest.UserId))
+                else if(!String.IsNullOrEmpty(getTracksRequest.UserName))
                 {
                     tracks = _trackRepository.GetTracksByUserName(getTracksRequest.UserName);
                 }

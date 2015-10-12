@@ -35,8 +35,8 @@ soundTrackrControllers.controller('TracksCtrl', ['$scope', 'TrackAPI', 'UserTrac
       $scope.getTrack = function getTrack(id) {
           TrackAPI.track.query({ trackId: id }, function (resp) {
 
-              myLayer.setGeoJSON(resp.GeoJsonLayers[0].GeoJsonObject);
-              map.setView(new Array(resp.GeoJsonLayers[0].GeoJsonObject.features[0].geometry.coordinates[1], resp.GeoJsonLayers[0].GeoJsonObject.features[0].geometry.coordinates[0]), 14);
+              myLayer.setGeoJSON(resp.GeoJsonFeatures);
+              map.setView(new Array(resp.GeoJsonFeatures.features[0].geometry.coordinates[1], resp.GeoJsonFeatures.features[0].geometry.coordinates[0]), 14);
           });
       };
   }]);
