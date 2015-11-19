@@ -1,21 +1,45 @@
-﻿using System;
-using System.Linq;
-using System.Data.Entity;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoundTrackr.Common.UnitOfWork;
 using Moq;
-using SoundTrackr.Repository;
 using SoundTrackr.Repository.Repositories;
-using System.Collections.Generic;
 using SoundTrackr.Common.Domain;
-using SoundTrackr.Domain.Entities.Track;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using SoundTrackr.Repository.Context;
 using SoundTrackr.Repository.DatabaseModels;
+using System.Data.Entity;
+using Machine.Specifications;
 
-namespace SoundTrackr.Web.Tests.Repositories
+namespace SoundTrackr.Specs.Repositories
 {
+    public class When_inserting_domain_entity : GenericDomainTypeRepositorySpec
+    {
+        Establish context = () =>
+        {
+
+        };
+
+        Because of = () => sut.Insert(entity);
+
+        Machine.Specifications.It should_add_the_entity_to_the_unit_of_work = () =>
+        {
+
+        };
+
+        private static TestEntity entity;
+    }
+
+    public class GenericDomainTypeRepositorySpec : BaseRepoSpec
+    {
+        Establish context = () =>
+        {
+            sut = _fixture.Create<GenericDomainTypeRepository<TestEntity, TestEntityDb, int>>();
+        };
+
+        protected static GenericDomainTypeRepository<TestEntity, TestEntityDb, int> sut;
+    }
+
     public class TestEntity : EntityBase<int>, IAggregateRoot 
     {
         protected override void Validate()
@@ -44,7 +68,7 @@ namespace SoundTrackr.Web.Tests.Repositories
     }
 
     [TestClass]
-    public class GenericRepoTests
+    public class GenericDomainTypeRepositorySpec_Old
     {
         private Mock<IUnitOfWork> _mockUnitOfWork;
         private Mock<IDbContextFactory> _mockDbContextFactory;

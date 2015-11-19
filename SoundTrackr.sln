@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Web", "SoundTrackr.Web\SoundTrackr.Web.csproj", "{DB8B5101-D94F-46AF-B843-5732CACC7F3D}"
 EndProject
@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Common", "Sound
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Repository", "SoundTrackr.Repository\SoundTrackr.Repository.csproj", "{F9DA73AF-AF6E-489B-BCC7-B952E7623997}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Tests", "SoundTrackr.Tests\SoundTrackr.Tests.csproj", "{38BC871A-D495-45D9-920E-BDC38F75B4FA}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SoundTrackr.Db", "SoundTrackr.Db\SoundTrackr.Db.sqlproj", "{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrackr.Specs", "SoundTrackr.Specs\SoundTrackr.Specs.csproj", "{38BC871A-D495-45D9-920E-BDC38F75B4FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,16 +43,16 @@ Global
 		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9DA73AF-AF6E-489B-BCC7-B952E7623997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2288559F-7EEE-44E9-BA9B-1E1FBE6CAACC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38BC871A-D495-45D9-920E-BDC38F75B4FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
