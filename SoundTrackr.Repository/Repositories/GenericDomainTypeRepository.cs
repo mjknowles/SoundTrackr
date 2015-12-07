@@ -19,7 +19,7 @@ namespace SoundTrackr.Repository.Repositories
         private readonly IUnitOfWork _unitOfWork;
         internal DbContext _context;
 
-        public GenericDomainTypeRepository(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory)
+        protected GenericDomainTypeRepository(IUnitOfWork unitOfWork, IDbContextFactory dbContextFactory)
         {
             if (unitOfWork == null) throw new ArgumentNullException("Unit of work");
             _unitOfWork = unitOfWork;

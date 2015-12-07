@@ -17,20 +17,21 @@ namespace SoundTrackr.Specs.Repositories
     {
         Establish context = () =>
         {
-
+            entity = _fixture.Create<TestEntity>();
+            sut = _fixture.Create<GenericDomainTypeRepository<TestEntity, TestEntityDb, int>>();
         };
 
         Because of = () => sut.Insert(entity);
 
         Machine.Specifications.It should_add_the_entity_to_the_unit_of_work = () =>
         {
-
+            _entities.Count.ShouldEqual(1);
         };
 
         private static TestEntity entity;
     }
 
-    public class GenericDomainTypeRepositorySpec : BaseRepoSpec
+    public class GenericDomainTypeRepositorySpec : BaseRepoSpec<TestEntity>
     {
         Establish context = () =>
         {
